@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЖК Новый Комитас | Квартиры в Арабкире, Ереван — от 37 м²</title>
+    <meta name="description"
+        content="ЖК Новый Комитас — жилой квартал в Арабкире, Ереван. 3224 квартиры от 37 до 90 м², 18 этажей, 5 га территории. Метро Дружба рядом. Сдача I очереди 2027. Студии, SMART, семейные квартиры.">
+    <meta name="keywords"
+        content="жк новый комитас, new komitas yerevan, квартиры в ереване, купить квартиру ереван, новостройки ереван, arabkir apartments, арабкир квартиры, yerevan new residential complex, apartments arabkir yerevan">
+    <meta property="og:title" content="ЖК Новый Комитас | Ереван, Арабкир">
+    <meta property="og:description"
+        content="3224 квартиры от 37 до 90 м² в престижном районе Арабкир. Метро, инфраструктура, сдача 2027–2029.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="./style.css">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <span class="preloader-logo">NK</span>
+            <div class="preloader-bar">
+                <div class="preloader-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="premium-nav" id="nav">
+        <div class="container nav-inner">
+            <a href="#" class="logo-accent">NEW KOMITAS</a>
+            <div class="nav-links">
+                <a href="#lifestyle">Архитектура</a>
+                <a href="#advantages">Преимущества</a>
+                <a href="#plans">Планировки</a>
+                <a href="#location">Район</a>
+                <a href="#investment">Инвестиции</a>
+                <a href="#quiz">Подбор</a>
+            </div>
+            <a href="#contact" class="nav-cta">Получить предложение</a>
+            <button class="nav-burger" id="navBurger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#lifestyle" class="mob-link">Архитектура</a>
+        <a href="#advantages" class="mob-link">Преимущества</a>
+        <a href="#plans" class="mob-link">Планировки</a>
+        <a href="#gallery" class="mob-link">Галерея</a>
+        <a href="#quiz" class="mob-link">Подбор</a>
+        <a href="#contact" class="mob-link mob-cta">Получить предложение</a>
+    </div>
+
+    <!-- 1. HERO SECTION — CINEMATIC FULLSCREEN -->
+    <section class="hero-section" id="hero">
+        <div class="hero-bg-container">
+            <div class="hero-bg" id="heroBg">
+                <img src="./imgs/f.jpg" alt="New Komitas — Жилой комплекс в Ереване" id="heroImg">
+                <div class="hero-overlay"></div>
+                <div class="hero-overlay-gradient"></div>
+            </div>
+        </div>
+
+        <!-- Architectural line accents -->
+        <div class="hero-line hero-line--v left"></div>
+        <div class="hero-line hero-line--v right"></div>
+        <div class="hero-line hero-line--h bottom"></div>
+
+        <div class="container hero-content-wrapper">
+            <!-- Left: Typography -->
+            <div class="hero-text-side">
+                <div class="overflow-hidden">
+                    <p class="hero-eyebrow reveal-text">Жилой комплекс премиум-класса</p>
+                </div>
+                <div class="overflow-hidden">
+                    <h1 class="hero-title reveal-text">НОВЫЙ<br>КОМИТАС</h1>
+                </div>
+                <div class="overflow-hidden">
+                    <p class="hero-desc reveal-text">Безупречная архитектура в сердце Арабкира.<br>Пространство, где
+                        форма встречается с совершенством.</p>
+                </div>
+
+                <div class="hero-metrics reveal-text">
+                    <div class="metric">
+                        <span class="m-val">18</span>
+                        <span class="m-lbl">Этажей</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric">
+                        <span class="m-val">3.2м</span>
+                        <span class="m-lbl">Потолки</span>
+                    </div>
+                    <div class="metric-divider"></div>
+                    <div class="metric">
+                        <span class="m-val">5 Га</span>
+                        <span class="m-lbl">Территория</span>
+                    </div>
+                </div>
+
+                <div class="hero-actions reveal-text">
+                    <a href="#plans" class="btn-primary">Смотреть планировки</a>
+                    <a href="#quiz" class="btn-ghost">Подобрать квартиру</a>
+                </div>
+            </div>
+
+            <!-- Right: Glass Form -->
+            <div class="hero-form-side" id="heroForm">
+                <div class="hero-glass-form">
+                    <div class="form-badge">Эксклюзивно</div>
+                    <h3 class="form-title">Получить&nbsp;презентацию</h3>
+                    <p class="form-desc">Оставьте контакты — пришлём закрытый каталог планировок и актуальные цены.</p>
+                    <form class="lead-form" id="heroLeadForm">
+                        <div class="input-group">
+                            <label>Ваше имя</label>
+                            <input type="text" placeholder="Александр" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Телефон</label>
+                            <input type="tel" placeholder="+374 (__) ___-___" required>
+                        </div>
+                        <button type="submit" class="btn-primary w-100">
+                            <span>Скачать PDF — 24 MB</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <p class="form-privacy">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator" id="scrollIndicator">
+            <div class="scroll-line">
+                <div class="scroll-dot"></div>
+            </div>
+            <p>Исследовать проект</p>
+        </div>
+
+        <!-- Corner tag -->
+        <div class="hero-corner-tag">Ереван · Арабкир · 2026</div>
+    </section>
+
+    <!-- 2. LIFESTYLE (Immersive Architecture) -->
+    <section id="lifestyle" class="section lifestyle-section">
+        <div class="container lifestyle-container">
+            <div class="lifestyle-text">
+                <span class="accent-label">Стиль жизни</span>
+                <h2 class="title-primary">Жизнь в центре<br>современной<br><em>архитектуры</em></h2>
+                <div class="lifestyle-body">
+                    <p>Жилой комплекс Новый Комитас — это современный жилой квартал, созданный для комфортной городской
+                        жизни. Просторная территория, развитая инфраструктура и архитектура нового поколения формируют
+                        уникальную атмосферу городского пространства.</p>
+                </div>
+                <div class="lifestyle-tags">
+                    <span class="tag">Монолитный бетон</span>
+                    <span class="tag">Двор без машин</span>
+                    <span class="tag">Панорамное остекление</span>
+                    <span class="tag">Умная инженерия</span>
+                </div>
+                <a href="#plans" class="btn-outline-premium mt-40">Смотреть планировки</a>
+            </div>
+            <div class="lifestyle-images">
+                <div class="img-wrapper reveal-mask" data-speed="1.05">
+                    <img src="./imgs/f (1).jpg" alt="Новый Комитас — архитектура">
+                    <div class="img-caption">Арабкир, Ереван</div>
+                </div>
+                <div class="img-wrapper reveal-mask offset-img" data-speed="0.95">
+                    <img src="./imgs/f (2).jpg" alt="Новый Комитас — территория">
+                    <div class="img-caption">5 га территории</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. NUMBERS (Animated Counters) -->
+    <section class="section numbers-section" id="numbers">
+        <div class="numbers-bg-line"></div>
+        <div class="container">
+            <div class="numbers-header text-center fade-up">
+                <span class="accent-label">ЖК в цифрах</span>
+            </div>
+            <div class="numbers-grid" id="counters">
+                <div class="number-item fade-up">
+                    <div class="num-val">
+                        <span class="counter" data-target="5">0</span>
+                        <span class="num-suffix">га</span>
+                    </div>
+                    <div class="num-title">Территория</div>
+                    <div class="num-label">Просторная благоустроенная территория жилого квартала.</div>
+                </div>
+                <div class="number-item fade-up" style="transition-delay:0.1s">
+                    <div class="num-val">
+                        <span class="counter" data-target="3224">0</span>
+                    </div>
+                    <div class="num-title">Квартиры</div>
+                    <div class="num-label">Современные квартиры различных планировок.</div>
+                </div>
+                <div class="number-item fade-up" style="transition-delay:0.2s">
+                    <div class="num-val">
+                        <span class="counter" data-target="18">0</span>
+                    </div>
+                    <div class="num-title">Этажей</div>
+                    <div class="num-label">Этажей современной монолитной архитектуры.</div>
+                </div>
+                <div class="number-item fade-up" style="transition-delay:0.3s">
+                    <div class="num-val">
+                        <span class="counter" data-target="7">0</span>
+                        <span class="num-suffix">мин</span>
+                    </div>
+                    <div class="num-title">До центра</div>
+                    <div class="num-label">До центра Еревана.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ADVANTAGES -->
+    <section id="advantages" class="section dark-bg">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Преимущества</span>
+                <h2 class="title-primary">Продуманно<br>до мелочей</h2>
+                <p class="section-desc">Проект разработан с учётом самых строгих стандартов комфорт-плюс класса. Каждое
+                    техническое и архитектурное решение направлено на создание безупречной среды для вашей семьи.</p>
+            </div>
+
+            <div class="adv-grid">
+                <div class="adv-card fade-up">
+                    <div class="adv-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 3L4 8v6c0 5.52 4.27 10.69 10 12 5.73-1.31 10-6.48 10-12V8L14 3z"
+                                stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="adv-num">01</div>
+                    <h3 class="adv-title">Монолитный железобетон</h3>
+                    <p class="adv-desc">Высочайшая сейсмостойкость конструкции. Двойные стены со звуко- и теплоизоляцией
+                        из пемзоблока обеспечивают тишину и комфорт в любую погоду.</p>
+                    <div class="adv-line"></div>
+                </div>
+                <div class="adv-card fade-up" style="transition-delay:0.1s">
+                    <div class="adv-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 3v5M14 20v5M3 14h5M20 14h5" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                            <circle cx="14" cy="14" r="5" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                    </div>
+                    <div class="adv-num">02</div>
+                    <h3 class="adv-title">Smart-инженерия</h3>
+                    <p class="adv-desc">Европейские скоростные лифты, собственная котельная для бесперебойного
+                        отопления, резервные генераторы для зон общего пользования.</p>
+                    <div class="adv-line"></div>
+                </div>
+                <div class="adv-card fade-up" style="transition-delay:0.2s">
+                    <div class="adv-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M14 8v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="adv-num">03</div>
+                    <h3 class="adv-title">Двор без машин</h3>
+                    <p class="adv-desc">Огромная территория 5 га полностью свободна от автомобилей. 3123 места в
+                        подземном паркинге, зарядки для электромобилей и безопасные пешеходные аллеи.</p>
+                    <div class="adv-line"></div>
+                </div>
+                <div class="adv-card fade-up" style="transition-delay:0.3s">
+                    <div class="adv-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <rect x="4" y="4" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M4 10h20" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M10 10v14" stroke="currentColor" stroke-width="1.5" />
+                        </svg>
+                    </div>
+                    <div class="adv-num">04</div>
+                    <h3 class="adv-title">Премиальная отделка</h3>
+                    <p class="adv-desc">Входные группы и лифтовые холлы отделаны долговечным керамогранитом. Высокие
+                        потолки (3.2м) и панорамное алюминиевое остекление.</p>
+                    <div class="adv-line"></div>
+                </div>
+                <div class="adv-card fade-up" style="transition-delay:0.4s">
+                    <div class="adv-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 4C8.48 4 4 8.48 4 14s4.48 10 10 10 10-4.48 10-10S19.52 4 14 4z"
+                                stroke="currentColor" stroke-width="1.5" />
+                            <path d="M14 8v6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="adv-num">05</div>
+                    <h3 class="adv-title">Город в городе</h3>
+                    <p class="adv-desc">Собственный 4-х этажный детский сад, прогулочные зоны отдыха, теннисный корт,
+                        воркаут-площадки, супермаркеты и кафе прямо на территории.</p>
+                    <div class="adv-line"></div>
+                </div>
+                <div class="adv-card fade-up" style="transition-delay:0.5s">
+                    <div class="adv-icon-wrap">
+                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M14 3l2.5 8h8.5l-7 5 2.5 8-7-5-7 5 2.5-8-7-5h8.5z" stroke="currentColor"
+                                stroke-width="1.5" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <div class="adv-num">06</div>
+                    <h3 class="adv-title">Локация</h3>
+                    <p class="adv-desc">Район Арабкир, улица Аргутян. 7 минут до центра города, парки, топовые школы и
+                        медцентры в пешей доступности.</p>
+                    <div class="adv-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. PLANS CATALOG -->
+    <section id="plans" class="section dark-bg plans-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Коллекция</span>
+                <h2 class="title-primary">Каталог планировок</h2>
+                <p class="section-desc">Выберите формат жилья, который соответствует вашему образу жизни.</p>
+            </div>
+
+            <div class="plans-grid">
+                <!-- STUDIO -->
+                <div class="plan-card fade-up">
+                    <div class="plan-type-badge">Студии</div>
+                    <div class="plan-img-wrap">
+                        <img src="./imgs/f (3).jpg" alt="Студия 36 м²">
+                        <div class="plan-overlay">
+                            <a href="#contact" class="btn-primary btn-small">Смотреть планировку</a>
+                        </div>
+                    </div>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <h3>Студии</h3>
+                            <div class="plan-area">36 м²</div>
+                        </div>
+                        <p class="plan-desc">Компактные квартиры для первого жилья и инвестиций.</p>
+                        <a href="#contact" class="plan-link">Узнать цену <span>→</span></a>
+                    </div>
+                </div>
+
+                <!-- SMART -->
+                <div class="plan-card fade-up" style="transition-delay:0.15s">
+                    <div class="plan-type-badge popular">SMART</div>
+                    <div class="plan-img-wrap">
+                        <img src="./imgs/f (4).jpg" alt="SMART 45 м²">
+                        <div class="plan-overlay">
+                            <a href="#contact" class="btn-primary btn-small">Смотреть планировку</a>
+                        </div>
+                    </div>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <h3>SMART квартиры</h3>
+                            <div class="plan-area">45 м²</div>
+                        </div>
+                        <p class="plan-desc">Современные планировки с кухней-гостиной и высокими потолками.</p>
+                        <a href="#contact" class="plan-link">Узнать цену <span>→</span></a>
+                    </div>
+                </div>
+
+                <!-- FAMILY -->
+                <div class="plan-card fade-up" style="transition-delay:0.3s">
+                    <div class="plan-type-badge">Семейные</div>
+                    <div class="plan-img-wrap">
+                        <img src="./imgs/f (5).jpg" alt="Семейная 90 м²">
+                        <div class="plan-overlay">
+                            <a href="#contact" class="btn-primary btn-small">Смотреть планировку</a>
+                        </div>
+                    </div>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <h3>Семейные квартиры</h3>
+                            <div class="plan-area">90 м²</div>
+                        </div>
+                        <p class="plan-desc">Просторные квартиры с несколькими спальнями.</p>
+                        <a href="#contact" class="plan-link">Узнать цену <span>→</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. LOCATION & MAP -->
+    <section id="location" class="section location-section">
+        <div class="container location-container">
+            <div class="location-info">
+                <span class="accent-label">Расположение</span>
+                <h2 class="title-primary">Жизнь<br>в Арабкире</h2>
+                <p class="location-desc">Арабкир — один из самых престижных и развитых районов Еревана. Вся необходимая
+                    инфраструктура в шаговой доступности.</p>
+
+                <div class="loc-stats">
+                    <div class="loc-stat fade-up">
+                        <span class="loc-stat-val">5 мин</span>
+                        <span class="loc-stat-label">Метро «Дружба»</span>
+                    </div>
+                    <div class="loc-stat fade-up" style="transition-delay:.1s">
+                        <span class="loc-stat-val">7 мин</span>
+                        <span class="loc-stat-label">До центра Еревана</span>
+                    </div>
+                    <div class="loc-stat fade-up" style="transition-delay:.2s">
+                        <span class="loc-stat-val">10 мин</span>
+                        <span class="loc-stat-label">ТЦ Ереван Сити</span>
+                    </div>
+                    <div class="loc-stat fade-up" style="transition-delay:.3s">
+                        <span class="loc-stat-val">10 мин</span>
+                        <span class="loc-stat-label">Rio Mall</span>
+                    </div>
+                </div>
+
+                <div class="loc-tags">
+                    <span class="loc-tag">🚇 Метро</span>
+                    <span class="loc-tag">🏫 Школы и детские сады</span>
+                    <span class="loc-tag">🌳 Парки</span>
+                    <span class="loc-tag">🏥 Медицина</span>
+                    <span class="loc-tag">🍽️ Кафе и рестораны</span>
+                    <span class="loc-tag">🚌 Автобусы и троллейбусы</span>
+                </div>
+
+                <address class="loc-address">
+                    <span class="c-label">Адрес объекта</span>
+                    <span>Ереван, район Арабкир, ул. Аргутян 1 (10/9)</span>
+                </address>
+            </div>
+
+            <div class="location-map fade-up">
+                <div class="map-wrapper">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Arabekir+Yerevan+Armenia+Argutyan&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" allowfullscreen loading="lazy"
+                        title="Карта расположения ЖК Новый Комитас"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6b. GALLERY -->
+    <section id="gallery" class="section gallery-section dark-bg">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Визуализация</span>
+                <h2 class="title-primary">Архитектурный ансамбль</h2>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item lightbox-trigger fade-up" data-src="./imgs/f.jpg">
+                    <img src="./imgs/f.jpg" alt="Архитектура 1">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.1s"
+                    data-src="./imgs/f (1).jpg">
+                    <img src="./imgs/f (1).jpg" alt="Архитектура 2">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.2s"
+                    data-src="./imgs/f (2).jpg">
+                    <img src="./imgs/f (2).jpg" alt="Интерьер 1">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger hidden-gallery" data-src="./imgs/f (3).jpg">
+                    <img src="./imgs/f (3).jpg" alt="Интерьер 2">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger hidden-gallery" data-src="./imgs/f (4).jpg">
+                    <img src="./imgs/f (4).jpg" alt="Территория 1">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger hidden-gallery" data-src="./imgs/f (5).jpg">
+                    <img src="./imgs/f (5).jpg" alt="Территория 2">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-50 fade-up">
+                <button id="loadMoreGallery" class="btn-outline-premium">
+                    <span>Показать ещё фото</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVESTMENT -->
+    <section id="investment" class="section investment-section">
+        <div class="container">
+            <div class="investment-header text-center fade-up">
+                <span class="accent-label">Инвестиции</span>
+                <h2 class="title-primary">Выгодное вложение<br><em>в Ереване</em></h2>
+                <p class="section-desc">Арабкир — престижный район с устойчивым ростом цен. Новый Комитас — актив с
+                    высокой ликвидностью.</p>
+            </div>
+
+            <div class="investment-grid">
+                <div class="inv-card fade-up">
+                    <div class="inv-icon">📈</div>
+                    <div class="inv-num">6–8%</div>
+                    <div class="inv-title">Доходность аренды</div>
+                    <p class="inv-desc">Стабильный пассивный доход от сдачи квартиры в аренду в престижном районе
+                        Еревана.</p>
+                </div>
+                <div class="inv-card fade-up" style="transition-delay:.1s">
+                    <div class="inv-icon">🏗️</div>
+                    <div class="inv-num">2027</div>
+                    <div class="inv-title">Сдача I очереди</div>
+                    <p class="inv-desc">Первые жильцы получат ключи в 2027 году. Полное завершение строительства — 2029.
+                    </p>
+                </div>
+                <div class="inv-card fade-up" style="transition-delay:.2s">
+                    <div class="inv-icon">🏙️</div>
+                    <div class="inv-num">20</div>
+                    <div class="inv-title">Секций в комплексе</div>
+                    <p class="inv-desc">2 здания, 20 секций, 3224 квартиры. Высокая ликвидность крупного жилого
+                        квартала.</p>
+                </div>
+                <div class="inv-card fade-up" style="transition-delay:.3s">
+                    <div class="inv-icon">📍</div>
+                    <div class="inv-num">#1</div>
+                    <div class="inv-title">Район Арабкир</div>
+                    <p class="inv-desc">Один из наиболее престижных районов Еревана с постоянно растущим спросом на
+                        жильё.</p>
+                </div>
+            </div>
+
+            <div class="inv-cta text-center fade-up">
+                <a href="#quiz" class="btn-primary">Подобрать квартиру для инвестиций</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+        </button>
+        <img class="lightbox-content" id="lightbox-img" alt="">
+        <button class="lightbox-prev" id="lightboxPrev" aria-label="Предыдущее">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+        <button class="lightbox-next" id="lightboxNext" aria-label="Следующее">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- 7. QUIZ -->
+    <section id="quiz" class="section quiz-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Подбор</span>
+                <h2 class="title-primary">Подберите квартиру<br>за 30 секунд</h2>
+            </div>
+
+            <div class="quiz-container glass-card fade-up">
+                <!-- Progress -->
+                <div class="quiz-progress-wrap">
+                    <div class="quiz-progress-bar">
+                        <div class="progress-fill" id="quiz-progress-fill" style="width:20%"></div>
+                    </div>
+                    <span class="quiz-progress-label" id="quizStepLabel">Шаг 1 из 4</span>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="quiz-step active" id="step-1">
+                    <h3 class="quiz-question">Для чего вы покупаете квартиру?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="nextQuizStep(2, this)">
+                            <span class="qbtn-icon">🏠</span>
+                            <span class="qbtn-text">Для жизни</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(2, this)">
+                            <span class="qbtn-icon">📈</span>
+                            <span class="qbtn-text">Для инвестиций</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(2, this)">
+                            <span class="qbtn-icon">🔑</span>
+                            <span class="qbtn-text">Для аренды</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="quiz-step" id="step-2">
+                    <h3 class="quiz-question">Какой формат вам нужен?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="nextQuizStep(3, this)">
+                            <span class="qbtn-icon">🏙️</span>
+                            <span class="qbtn-text">Студии (комфорт, 36 м²)</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(3, this)">
+                            <span class="qbtn-icon">✨</span>
+                            <span class="qbtn-text">SMART (кухня-гостиная, 45 м²)</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(3, this)">
+                            <span class="qbtn-icon">👨‍👩‍👧‍👦</span>
+                            <span class="qbtn-text">Семейные (несколько спален, 90 м²)</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="quiz-step" id="step-3">
+                    <h3 class="quiz-question">Бюджет покупки</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="nextQuizStep(4, this)">
+                            <span class="qbtn-icon">💰</span>
+                            <span class="qbtn-text">До $80 000</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(4, this)">
+                            <span class="qbtn-icon">💎</span>
+                            <span class="qbtn-text">$80 000 – $150 000</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(4, this)">
+                            <span class="qbtn-icon">🏆</span>
+                            <span class="qbtn-text">От $150 000</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="quiz-step" id="step-4">
+                    <h3 class="quiz-question">Когда планируете покупку?</h3>
+                    <div class="quiz-options">
+                        <button class="quiz-btn" onclick="nextQuizStep(5, this)">
+                            <span class="qbtn-icon">⚡</span>
+                            <span class="qbtn-text">В течение месяца</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(5, this)">
+                            <span class="qbtn-icon">📅</span>
+                            <span class="qbtn-text">В этом квартале</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                        <button class="quiz-btn" onclick="nextQuizStep(5, this)">
+                            <span class="qbtn-icon">🔍</span>
+                            <span class="qbtn-text">Изучаю рынок</span>
+                            <span class="qbtn-arrow">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Final Step -->
+                <div class="quiz-step" id="step-5">
+                    <div class="quiz-result-badge">✓ Персональная подборка готова</div>
+                    <h3 class="quiz-question">Получите актуальные предложения</h3>
+                    <p class="quiz-subtext">Оставьте контакты — пришлём PDF-презентацию подходящих планировок и
+                        специальные условия бронирования.</p>
+                    <form class="quiz-form" id="quizForm">
+                        <div class="quiz-inputs">
+                            <input type="text" placeholder="Ваше имя" class="form-input" required>
+                            <input type="tel" placeholder="+374 (__) ___-___" class="form-input" required>
+                        </div>
+                        <button type="submit" class="btn-primary w-100">
+                            <span>Получить презентацию</span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. PURCHASE TIMELINE -->
+    <section class="section dark-bg timeline-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Сделка</span>
+                <h2 class="title-primary">Процесс покупки</h2>
+                <p class="section-desc">Простой и прозрачный путь к вашей квартире в четыре шага.</p>
+            </div>
+
+            <div class="timeline">
+                <div class="time-item fade-up">
+                    <div class="time-num">01</div>
+                    <div class="time-content">
+                        <h4>Оставляете заявку</h4>
+                        <p>Наш специалист связывается с вами в течение 15 минут.</p>
+                    </div>
+                </div>
+                <div class="time-item fade-up" style="transition-delay:0.15s">
+                    <div class="time-num">02</div>
+                    <div class="time-content">
+                        <h4>Консультация</h4>
+                        <p>Подбираем подходящую квартиру под ваши задачи и бюджет.</p>
+                    </div>
+                </div>
+                <div class="time-item fade-up" style="transition-delay:0.3s">
+                    <div class="time-num">03</div>
+                    <div class="time-content">
+                        <h4>Бронирование</h4>
+                        <p>Фиксируем выбранную планировку и цену за вами.</p>
+                    </div>
+                </div>
+                <div class="time-item fade-up" style="transition-delay:0.45s">
+                    <div class="time-num">04</div>
+                    <div class="time-content">
+                        <h4>Оформление сделки</h4>
+                        <p>Заключаем договор. Безопасно, прозрачно, юридически чисто.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. DRAMATIC CTA -->
+    <section id="contact" class="section cta-section">
+        <div class="cta-bg">
+            <img src="./imgs/f (2).jpg" alt="New Komitas — CTA" id="ctaBg">
+            <div class="cta-overlay"></div>
+        </div>
+        <div class="container cta-inner text-center">
+            <span class="accent-label fade-up">Начать сейчас</span>
+            <h2 class="cta-title fade-up">Оставьте заявку и получите<br>актуальные предложения<br><em>по квартирам.</em>
+            </h2>
+            <div class="cta-form-wrap fade-up">
+                <form class="cta-form glass-card" id="ctaForm">
+                    <div class="cta-inputs">
+                        <input type="text" class="form-input" placeholder="Имя" required>
+                        <input type="tel" class="form-input" placeholder="+374 (__) ___-___" required>
+                    </div>
+                    <button type="submit" class="btn-primary cta-btn">
+                        <span>Получить предложение</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+                </form>
+                <p class="cta-privacy">Ваши данные защищены. Никакого спама.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <a href="#" class="logo-accent footer-logo">NK</a>
+                <p class="footer-desc">Ереван. Премиальный жилой<br>комплекс нового поколения.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Telegram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-nav">
+                <div class="footer-nav-col">
+                    <span class="footer-nav-title">Навигация</span>
+                    <a href="#lifestyle">Архитектура</a>
+                    <a href="#advantages">Преимущества</a>
+                    <a href="#plans">Планировки</a>
+                    <a href="#gallery">Галерея</a>
+                </div>
+                <div class="footer-nav-col">
+                    <span class="footer-nav-title">Контакты</span>
+                    <a href="tel:+79184082834">+7 (918) 408-28-34</a>
+                    <a href="mailto:zurnadzhyan_a@mail.ru">zurnadzhyan_a@mail.ru</a>
+                    <span class="footer-address">Ереван, Арабкир,<br>ул. Аргутян 1</span>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>© 2026. Жилой комплекс Новый Комитас.</p>
+            <p>Разработано с заботой о будущем.</p>
+        </div>
+    </footer>
+
+    <!-- SUCCESS TOAST -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✓</span>
+        <span>Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+    <script>
+        // QUIZ LOGIC
+        let currentStep = 1;
+        const totalSteps = 4;
+        const stepLabels = ['Шаг 1 из 4', 'Шаг 2 из 4', 'Шаг 3 из 4', 'Шаг 4 из 4', 'Завершение'];
+
+        function nextQuizStep(step, btn) {
+            if (btn) btn.classList.add('quiz-btn--selected');
+
+            const steps = document.querySelectorAll('.quiz-step');
+            const current = document.getElementById('step-' + currentStep);
+            if (current) {
+                current.classList.add('exiting');
+                setTimeout(() => {
+                    current.classList.remove('active', 'exiting');
+                }, 400);
+            }
+
+            setTimeout(() => {
+                currentStep = step;
+                const next = document.getElementById('step-' + step);
+                if (next) {
+                    next.classList.add('active');
+                }
+                const fill = document.getElementById('quiz-progress-fill');
+                if (fill) fill.style.width = (step / 5 * 100) + '%';
+                const label = document.getElementById('quizStepLabel');
+                if (label) label.textContent = stepLabels[step - 1] || '';
+            }, 420);
+        }
+
+        // FORMS
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.classList.add('toast--visible');
+            setTimeout(() => toast.classList.remove('toast--visible'), 4000);
+            e.target.reset();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('form').forEach(f => f.addEventListener('submit', handleFormSubmit));
+
+            // Mobile menu
+            const burger = document.getElementById('navBurger');
+            const menu = document.getElementById('mobileMenu');
+            if (burger && menu) {
+                burger.addEventListener('click', () => {
+                    burger.classList.toggle('active');
+                    menu.classList.toggle('open');
+                });
+                menu.querySelectorAll('a').forEach(a => {
+                    a.addEventListener('click', () => {
+                        burger.classList.remove('active');
+                        menu.classList.remove('open');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
