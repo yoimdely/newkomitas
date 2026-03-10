@@ -64,8 +64,8 @@ function runHeroIntro() {
 
     // Image zoom in
     tl.fromTo('#heroImg',
-        { scale: 1.2, filter: 'brightness(0) contrast(110%)' },
-        { scale: 1, filter: 'contrast(110%) brightness(0.65)', duration: 2.8, ease: 'power3.inOut' },
+        { scale: 1.15, filter: 'contrast(105%) brightness(0.35)' },
+        { scale: 1, filter: 'contrast(110%) brightness(0.65)', duration: 2.4, ease: 'power3.inOut' },
         0
     )
 
