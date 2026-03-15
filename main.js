@@ -1,6 +1,7 @@
-import Lenis from '@studio-freight/lenis'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
+// ============================================================
+//  CORE LIBRARIES (GLOBAL INJECTION FROM CDN)
+// ============================================================
+// gsap, ScrollTrigger, and Lenis are now provided globally via index.html scripts
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -62,11 +63,16 @@ function runHeroIntro() {
         0
     )
 
-    // Image zoom in
-    tl.fromTo('#heroImg',
-        { scale: 1.15, filter: 'contrast(105%) brightness(0.35)' },
-        { scale: 1, filter: 'contrast(110%) brightness(0.65)', duration: 2.4, ease: 'power3.inOut' },
+    // Ambient background reveal
+    tl.fromTo('#heroBg',
+        { scale: 1.08, opacity: 0.72, filter: 'brightness(0.75)' },
+        { scale: 1, opacity: 1, filter: 'brightness(1)', duration: 2.2, ease: 'power3.inOut' },
         0
+    )
+    tl.fromTo(['.hero-ambient-orb', '.hero-ambient-diagonal', '.hero-ambient-frame'],
+        { opacity: 0, scale: 0.92 },
+        { opacity: 1, scale: 1, duration: 1.6, stagger: 0.08, ease: 'power3.out' },
+        0.2
     )
 
     // Architectural lines
@@ -233,6 +239,13 @@ ScrollTrigger.create({
 // ============================================================
 const loadMoreBtn = document.getElementById('loadMoreGallery')
 const hiddenItems = document.querySelectorAll('.hidden-gallery')
+const videoPresentationTrigger = document.getElementById('videoPresentationTrigger')
+const plansGrid = document.getElementById('plansGrid')
+const togglePlansCatalog = document.getElementById('togglePlansCatalog')
+const extraPlanCards = plansGrid ? plansGrid.querySelectorAll('.plan-card--extra') : []
+const managerModal = document.getElementById('managerModal')
+const managerModalClosers = managerModal?.querySelectorAll('[data-manager-close]') || []
+const managerModalOpeners = document.querySelectorAll('[data-manager-open]')
 
 if (loadMoreBtn && hiddenItems.length > 0) {
     loadMoreBtn.addEventListener('click', () => {
@@ -248,31 +261,105 @@ if (loadMoreBtn && hiddenItems.length > 0) {
     })
 }
 
+if (togglePlansCatalog && plansGrid && extraPlanCards.length > 0) {
+    togglePlansCatalog.addEventListener('click', () => {
+        const isExpanded = plansGrid.classList.toggle('is-expanded')
+        const nextLabel = isExpanded ? togglePlansCatalog.dataset.expandedLabel : togglePlansCatalog.dataset.collapsedLabel
+        if (nextLabel) togglePlansCatalog.textContent = nextLabel
+
+        if (isExpanded) {
+            extraPlanCards.forEach((card, index) => {
+                gsap.fromTo(card,
+                    { opacity: 0, y: 28 },
+                    { opacity: 1, y: 0, duration: 0.55, delay: index * 0.07, ease: 'power2.out' }
+                )
+            })
+        } else {
+            lenis.scrollTo('#plans', { offset: -80, duration: 1 })
+        }
+
+        ScrollTrigger.refresh()
+    })
+}
+
+function openManagerModal() {
+    if (!managerModal) return
+    managerModal.classList.add('active')
+    managerModal.setAttribute('aria-hidden', 'false')
+    document.body.classList.add('modal-open')
+    lenis.stop()
+}
+
+function closeManagerModal() {
+    if (!managerModal) return
+    managerModal.classList.remove('active')
+    managerModal.setAttribute('aria-hidden', 'true')
+    document.body.classList.remove('modal-open')
+    lenis.start()
+}
+
+window.closeManagerModal = closeManagerModal
+
+managerModalOpeners.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        event.preventDefault()
+        openManagerModal()
+    })
+})
+
+managerModalClosers.forEach((button) => {
+    button.addEventListener('click', closeManagerModal)
+})
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && managerModal?.classList.contains('active')) {
+        closeManagerModal()
+    }
+})
+
 // Lightbox
 const lightbox = document.getElementById('lightbox')
 const lightboxImg = document.getElementById('lightbox-img')
+const lightboxVideo = document.getElementById('lightboxVideo')
 const lightboxClose = document.getElementById('lightboxClose')
 const lightboxPrev = document.getElementById('lightboxPrev')
 const lightboxNext = document.getElementById('lightboxNext')
 
-let galleryImages = []
+let lightboxImages = []
 let currentLightboxIndex = 0
+let currentLightboxGroup = ''
 
-function buildGalleryImages() {
-    galleryImages = []
-    document.querySelectorAll('.lightbox-trigger').forEach((item) => {
+function buildLightboxImages(groupName) {
+    currentLightboxGroup = groupName
+    lightboxImages = []
+    document.querySelectorAll(`.lightbox-trigger[data-lightbox-group="${groupName}"]`).forEach((item) => {
         const src = item.getAttribute('data-src') || item.querySelector('img')?.src
         const alt = item.querySelector('img')?.alt || ''
-        if (src) galleryImages.push({ src, alt })
+        if (src) lightboxImages.push({ src, alt })
     })
 }
 
-function openLightbox(index) {
+function openLightboxImage(groupName, index) {
     if (!lightbox || !lightboxImg) return
+    buildLightboxImages(groupName)
     currentLightboxIndex = index
-    lightboxImg.src = galleryImages[index].src
-    lightboxImg.alt = galleryImages[index].alt
+    lightbox.classList.remove('is-video')
+    lightboxImg.src = lightboxImages[index].src
+    lightboxImg.alt = lightboxImages[index].alt
+    if (lightboxVideo) lightboxVideo.src = ''
     lightbox.classList.add('active')
+    lenis.stop()
+    document.body.style.overflow = 'hidden'
+}
+
+function openLightboxVideo(videoId) {
+    if (!lightbox || !lightboxVideo) return
+    lightbox.classList.add('active', 'is-video')
+    lightboxVideo.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`
+    if (lightboxImg) {
+        lightboxImg.src = ''
+        lightboxImg.alt = ''
+    }
     lenis.stop()
     document.body.style.overflow = 'hidden'
 }
@@ -282,18 +369,22 @@ function closeLightbox() {
     lightbox.classList.remove('active')
     lenis.start()
     document.body.style.overflow = ''
-    setTimeout(() => { if (lightboxImg) lightboxImg.src = '' }, 400)
+    setTimeout(() => {
+        lightbox.classList.remove('is-video')
+        if (lightboxImg) lightboxImg.src = ''
+        if (lightboxVideo) lightboxVideo.src = ''
+    }, 400)
 }
 
 function showLightboxImage(index) {
-    if (!galleryImages.length) return
-    currentLightboxIndex = (index + galleryImages.length) % galleryImages.length
+    if (!lightboxImages.length || lightbox.classList.contains('is-video')) return
+    currentLightboxIndex = (index + lightboxImages.length) % lightboxImages.length
     if (lightboxImg) {
         gsap.to(lightboxImg, {
             opacity: 0, scale: 0.95, duration: 0.2,
             onComplete: () => {
-                lightboxImg.src = galleryImages[currentLightboxIndex].src
-                lightboxImg.alt = galleryImages[currentLightboxIndex].alt
+                lightboxImg.src = lightboxImages[currentLightboxIndex].src
+                lightboxImg.alt = lightboxImages[currentLightboxIndex].alt
                 gsap.to(lightboxImg, { opacity: 1, scale: 1, duration: 0.3 })
             }
         })
@@ -301,10 +392,21 @@ function showLightboxImage(index) {
 }
 
 if (lightbox) {
-    buildGalleryImages()
+    document.querySelectorAll('.lightbox-trigger[data-lightbox-group]').forEach((item) => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault()
+            const groupName = item.dataset.lightboxGroup
+            if (!groupName) return
+            const groupItems = Array.from(document.querySelectorAll(`.lightbox-trigger[data-lightbox-group="${groupName}"]`))
+            const itemIndex = groupItems.indexOf(item)
+            if (itemIndex === -1) return
+            openLightboxImage(groupName, itemIndex)
+        })
+    })
 
-    document.querySelectorAll('.lightbox-trigger').forEach((item, index) => {
-        item.addEventListener('click', () => openLightbox(index))
+    videoPresentationTrigger?.addEventListener('click', () => {
+        const videoId = videoPresentationTrigger.dataset.videoId
+        if (videoId) openLightboxVideo(videoId)
     })
 
     lightboxClose?.addEventListener('click', closeLightbox)
@@ -319,6 +421,7 @@ if (lightbox) {
     document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('active')) return
         if (e.key === 'Escape') closeLightbox()
+        if (lightbox.classList.contains('is-video')) return
         if (e.key === 'ArrowLeft') showLightboxImage(currentLightboxIndex - 1)
         if (e.key === 'ArrowRight') showLightboxImage(currentLightboxIndex + 1)
     })

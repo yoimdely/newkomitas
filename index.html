@@ -22,6 +22,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
         rel="stylesheet">
+    <!-- CORE LIBRARIES (CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 </head>
 
 <body>
@@ -69,7 +73,12 @@
     <section class="hero-section" id="hero">
         <div class="hero-bg-container">
             <div class="hero-bg" id="heroBg">
-                <img src="./imgs/f.jpg" alt="New Komitas — Жилой комплекс в Ереване" id="heroImg">
+                <img class="hero-photo" src="./imgs/f (1).jpg" alt="" loading="eager" fetchpriority="high">
+                <div class="hero-ambient-grid"></div>
+                <div class="hero-ambient-orb hero-ambient-orb--primary"></div>
+                <div class="hero-ambient-orb hero-ambient-orb--secondary"></div>
+                <div class="hero-ambient-diagonal"></div>
+                <div class="hero-ambient-frame"></div>
                 <div class="hero-overlay"></div>
                 <div class="hero-overlay-gradient"></div>
             </div>
@@ -101,12 +110,12 @@
                     </div>
                     <div class="metric-divider"></div>
                     <div class="metric">
-                        <span class="m-val">3.2м</span>
+                        <span class="m-val">3 м</span>
                         <span class="m-lbl">Потолки</span>
                     </div>
                     <div class="metric-divider"></div>
                     <div class="metric">
-                        <span class="m-val">5 Га</span>
+                        <span class="m-val">5 га</span>
                         <span class="m-lbl">Территория</span>
                     </div>
                 </div>
@@ -122,7 +131,8 @@
                 <div class="hero-glass-form">
                     <div class="form-badge">Эксклюзивно</div>
                     <h3 class="form-title">Получить&nbsp;презентацию</h3>
-                    <p class="form-desc">Оставьте контакты — пришлём закрытый каталог планировок и актуальные цены.</p>
+                    <p class="form-desc">Оставьте контакты — пришлём презентацию проекта, каталог
+                        планировок, актуальные цены и предложим удобное время для тура по комплексу.</p>
                     <form class="lead-form" id="heroLeadForm">
                         <div class="input-group">
                             <label>Ваше имя</label>
@@ -157,7 +167,47 @@
         <div class="hero-corner-tag">Ереван · Арабкир · 2026</div>
     </section>
 
-    <!-- 2. LIFESTYLE (Immersive Architecture) -->
+    <!-- 2. VIDEO PRESENTATION -->
+    <section id="video" class="section video-section">
+        <div class="container">
+            <div class="section-header section-header--split fade-up">
+                <div>
+                    <span class="accent-label">Видео-презентация</span>
+                    <h2 class="title-primary">Видео-презентация<br>жилого комплекса</h2>
+                </div>
+                <div class="video-intro-card">
+                    <span class="video-intro-label">Cinematic обзор проекта</span>
+                    <p class="video-intro-text">Познакомьтесь с архитектурой и атмосферой жилого комплекса Новый
+                        Комитас в презентационном видеоролике.</p>
+                    <div class="video-intro-tags">
+                        <span>Архитектура</span>
+                        <span>Атмосфера</span>
+                        <span>Масштаб проекта</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="video-card fade-up" id="videoPresentationTrigger" type="button"
+                aria-label="Открыть видео-презентацию жилого комплекса" data-video-id="KMu3bQOhPHY">
+                <img src="https://i.ytimg.com/vi/KMu3bQOhPHY/maxresdefault.jpg"
+                    onerror="this.onerror=null;this.src='./imgs/f.jpg';"
+                    alt="Видео-презентация жилого комплекса Новый Комитас" loading="lazy">
+                <span class="video-card-overlay"></span>
+                <span class="video-card-gradient"></span>
+                <span class="video-card-play" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                        <path d="M9 7.75v10.5L18 13 9 7.75Z" fill="currentColor" />
+                    </svg>
+                </span>
+                <span class="video-card-meta">
+                    <span class="video-card-kicker">Смотреть ролик</span>
+                    <span class="video-card-caption">Архитектура, дворы и масштаб комплекса в cinematic-формате.</span>
+                </span>
+            </button>
+        </div>
+    </section>
+
+    <!-- 3. LIFESTYLE (Immersive Architecture) -->
     <section id="lifestyle" class="section lifestyle-section">
         <div class="container lifestyle-container">
             <div class="lifestyle-text">
@@ -189,12 +239,15 @@
         </div>
     </section>
 
-    <!-- 3. NUMBERS (Animated Counters) -->
+    <!-- 4. NUMBERS (Animated Counters) -->
     <section class="section numbers-section" id="numbers">
         <div class="numbers-bg-line"></div>
         <div class="container">
             <div class="numbers-header text-center fade-up">
                 <span class="accent-label">ЖК в цифрах</span>
+                <h2 class="title-primary">Масштаб проекта<br><em>в цифрах</em></h2>
+                <p class="section-desc">Ключевые параметры, которые сразу объясняют объём проекта, инфраструктуру и
+                    потенциал ежедневного комфорта.</p>
             </div>
             <div class="numbers-grid" id="counters">
                 <div class="number-item fade-up">
@@ -202,43 +255,46 @@
                         <span class="counter" data-target="5">0</span>
                         <span class="num-suffix">га</span>
                     </div>
-                    <div class="num-title">Территория</div>
-                    <div class="num-label">Просторная благоустроенная территория жилого квартала.</div>
+                    <div class="num-title">Территория жилого комплекса</div>
+                    <div class="num-label">Пространство для приватного двора, прогулочных маршрутов и инфраструктуры
+                        внутри квартала.</div>
                 </div>
                 <div class="number-item fade-up" style="transition-delay:0.1s">
                     <div class="num-val">
                         <span class="counter" data-target="3224">0</span>
                     </div>
-                    <div class="num-title">Квартиры</div>
-                    <div class="num-label">Современные квартиры различных планировок.</div>
+                    <div class="num-title">Количество квартир</div>
+                    <div class="num-label">Широкий выбор форматов от инвестиционных студий до семейных резиденций.</div>
                 </div>
                 <div class="number-item fade-up" style="transition-delay:0.2s">
                     <div class="num-val">
                         <span class="counter" data-target="18">0</span>
                     </div>
-                    <div class="num-title">Этажей</div>
-                    <div class="num-label">Этажей современной монолитной архитектуры.</div>
+                    <div class="num-title">Этажей в жилых корпусах</div>
+                    <div class="num-label">Вертикальный масштаб проекта с панорамными видами и выразительным силуэтом.
+                    </div>
                 </div>
                 <div class="number-item fade-up" style="transition-delay:0.3s">
                     <div class="num-val">
                         <span class="counter" data-target="7">0</span>
                         <span class="num-suffix">мин</span>
                     </div>
-                    <div class="num-title">До центра</div>
-                    <div class="num-label">До центра Еревана.</div>
+                    <div class="num-title">До центра Еревана</div>
+                    <div class="num-label">Быстрый доступ к деловым, культурным и гастрономическим точкам города.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. ADVANTAGES -->
+    <!-- 5. ADVANTAGES -->
     <section id="advantages" class="section dark-bg">
         <div class="container">
             <div class="section-header text-center fade-up">
                 <span class="accent-label">Преимущества</span>
                 <h2 class="title-primary">Продуманно<br>до мелочей</h2>
                 <p class="section-desc">Проект разработан с учётом самых строгих стандартов комфорт-плюс класса. Каждое
-                    техническое и архитектурное решение направлено на создание безупречной среды для вашей семьи.</p>
+                    техническое и архитектурное решение направлено на создание безупречной среды для жизни, сервиса и
+                    долгосрочной инвестиционной ценности.</p>
             </div>
 
             <div class="adv-grid">
@@ -293,111 +349,351 @@
                     <div class="adv-num">04</div>
                     <h3 class="adv-title">Премиальная отделка</h3>
                     <p class="adv-desc">Входные группы и лифтовые холлы отделаны долговечным керамогранитом. Высокие
-                        потолки (3.2м) и панорамное алюминиевое остекление.</p>
+                        потолки (3 м) и панорамное алюминиевое остекление.</p>
                     <div class="adv-line"></div>
                 </div>
                 <div class="adv-card fade-up" style="transition-delay:0.4s">
                     <div class="adv-icon-wrap">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                            <path d="M14 4C8.48 4 4 8.48 4 14s4.48 10 10 10 10-4.48 10-10S19.52 4 14 4z"
-                                stroke="currentColor" stroke-width="1.5" />
-                            <path d="M14 8v6l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            <path d="M6 8.5h16v11H6z" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M10 8.5V6h8v2.5M10 14h3m2 0h3" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
                     <div class="adv-num">05</div>
-                    <h3 class="adv-title">Город в городе</h3>
-                    <p class="adv-desc">Собственный 4-х этажный детский сад, прогулочные зоны отдыха, теннисный корт,
-                        воркаут-площадки, супермаркеты и кафе прямо на территории.</p>
+                    <h3 class="adv-title">Коммерческая инфраструктура</h3>
+                    <p class="adv-desc">Отдельный этаж коммерческих помещений формирует ежедневный сервис прямо внутри
+                        квартала: магазины, услуги и точки повседневного комфорта находятся на территории комплекса.</p>
                     <div class="adv-line"></div>
                 </div>
                 <div class="adv-card fade-up" style="transition-delay:0.5s">
                     <div class="adv-icon-wrap">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                            <path d="M14 3l2.5 8h8.5l-7 5 2.5 8-7-5-7 5 2.5-8-7-5h8.5z" stroke="currentColor"
-                                stroke-width="1.5" stroke-linejoin="round" />
+                            <path d="M5 10.5L14 5l9 5.5V22H5V10.5Z" stroke="currentColor" stroke-width="1.5"
+                                stroke-linejoin="round" />
+                            <path d="M10 14h8M10 18h8" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
                         </svg>
                     </div>
                     <div class="adv-num">06</div>
-                    <h3 class="adv-title">Локация</h3>
-                    <p class="adv-desc">Район Арабкир, улица Аргутян. 7 минут до центра города, парки, топовые школы и
-                        медцентры в пешей доступности.</p>
+                    <h3 class="adv-title">Собственный торговый центр</h3>
+                    <p class="adv-desc">Торговый центр на территории комплекса собирает кафе, retail и сервисные
+                        пространства, создавая полноценную городскую среду без необходимости выезжать за её пределы.</p>
                     <div class="adv-line"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. PLANS CATALOG -->
-    <section id="plans" class="section dark-bg plans-section">
+    <!-- 6. 3D TOUR -->
+    <section id="tour" class="section tour-section">
         <div class="container">
-            <div class="section-header text-center fade-up">
-                <span class="accent-label">Коллекция</span>
-                <h2 class="title-primary">Каталог планировок</h2>
-                <p class="section-desc">Выберите формат жилья, который соответствует вашему образу жизни.</p>
-            </div>
-
-            <div class="plans-grid">
-                <!-- STUDIO -->
-                <div class="plan-card fade-up">
-                    <div class="plan-type-badge">Студии</div>
-                    <div class="plan-img-wrap">
-                        <img src="./imgs/f (3).jpg" alt="Студия 36 м²">
-                        <div class="plan-overlay">
-                            <a href="#contact" class="btn-primary btn-small">Смотреть планировку</a>
-                        </div>
+            <div class="tour-panel fade-up">
+                <div class="tour-copy">
+                    <span class="accent-label">Персональный тур</span>
+                    <h2 class="title-primary">Запишитесь на тур<br>по комплексу</h2>
+                    <p class="tour-desc">Организуем персональную встречу по проекту: покажем архитектуру, дворы,
+                        коммерческие помещения, торговый центр и подберём планировки под ваш бюджет и сценарий
+                        жизни.</p>
+                    <div class="tour-highlights">
+                        <span class="tour-chip">Архитектура и дворы</span>
+                        <span class="tour-chip">Коммерция и торговый центр</span>
+                        <span class="tour-chip">Подбор планировок</span>
                     </div>
-                    <div class="plan-info">
-                        <div class="plan-header">
-                            <h3>Студии</h3>
-                            <div class="plan-area">36 м²</div>
-                        </div>
-                        <p class="plan-desc">Компактные квартиры для первого жилья и инвестиций.</p>
-                        <a href="#contact" class="plan-link">Узнать цену <span>→</span></a>
-                    </div>
+                    <a href="#contact" class="btn-primary">Записаться на тур</a>
                 </div>
-
-                <!-- SMART -->
-                <div class="plan-card fade-up" style="transition-delay:0.15s">
-                    <div class="plan-type-badge popular">SMART</div>
-                    <div class="plan-img-wrap">
-                        <img src="./imgs/f (4).jpg" alt="SMART 45 м²">
-                        <div class="plan-overlay">
-                            <a href="#contact" class="btn-primary btn-small">Смотреть планировку</a>
-                        </div>
+                <div class="tour-visual tour-visual--agenda">
+                    <div class="tour-visual-head">
+                        <span class="tour-visual-kicker">Private Visit</span>
+                        <span class="tour-visual-badge">По записи</span>
                     </div>
-                    <div class="plan-info">
-                        <div class="plan-header">
-                            <h3>SMART квартиры</h3>
-                            <div class="plan-area">45 м²</div>
-                        </div>
-                        <p class="plan-desc">Современные планировки с кухней-гостиной и высокими потолками.</p>
-                        <a href="#contact" class="plan-link">Узнать цену <span>→</span></a>
+                    <div class="tour-visual-title">Что входит в тур по комплексу</div>
+                    <div class="tour-route">
+                        <article class="tour-stop">
+                            <span class="tour-stop-num">01</span>
+                            <div>
+                                <h3>Территория и архитектура</h3>
+                                <p>Покажем въездную группу, фасады, приватные дворы и общественные сценарии внутри
+                                    квартала.</p>
+                            </div>
+                        </article>
+                        <article class="tour-stop">
+                            <span class="tour-stop-num">02</span>
+                            <div>
+                                <h3>Инфраструктура проекта</h3>
+                                <p>Разберём коммерческие помещения, торговый центр и ежедневные сервисы для
+                                    резидентов.</p>
+                            </div>
+                        </article>
+                        <article class="tour-stop">
+                            <span class="tour-stop-num">03</span>
+                            <div>
+                                <h3>Планировки и условия</h3>
+                                <p>Сравним востребованные типы квартир, текущие предложения и подходящие сценарии
+                                    покупки.</p>
+                            </div>
+                        </article>
                     </div>
-                </div>
-
-                <!-- FAMILY -->
-                <div class="plan-card fade-up" style="transition-delay:0.3s">
-                    <div class="plan-type-badge">Семейные</div>
-                    <div class="plan-img-wrap">
-                        <img src="./imgs/f (5).jpg" alt="Семейная 90 м²">
-                        <div class="plan-overlay">
-                            <a href="#contact" class="btn-primary btn-small">Смотреть планировку</a>
+                    <div class="tour-mini-grid">
+                        <div class="tour-mini-card">
+                            <strong>45 мин</strong>
+                            <span>Средняя длительность встречи</span>
                         </div>
-                    </div>
-                    <div class="plan-info">
-                        <div class="plan-header">
-                            <h3>Семейные квартиры</h3>
-                            <div class="plan-area">90 м²</div>
+                        <div class="tour-mini-card">
+                            <strong>1 день</strong>
+                            <span>Организация тура после заявки</span>
                         </div>
-                        <p class="plan-desc">Просторные квартиры с несколькими спальнями.</p>
-                        <a href="#contact" class="plan-link">Узнать цену <span>→</span></a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 6. LOCATION & MAP -->
+    <!-- 7. INFRASTRUCTURE -->
+    <section id="ecosystem" class="section ecosystem-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Инфраструктура</span>
+                <h2 class="title-primary">Городская среда<br><em>внутри квартала</em></h2>
+                <p class="section-desc">Новый Комитас задуман как самодостаточный девелоперский проект, где сценарии
+                    жизни, сервиса и ритейла организованы прямо на территории комплекса.</p>
+            </div>
+
+            <div class="ecosystem-grid">
+                <article class="ecosystem-card fade-up">
+                    <span class="ecosystem-kicker">Коммерческий этаж</span>
+                    <h3>Коммерческие помещения на территории комплекса</h3>
+                    <p>На территории жилого комплекса предусмотрен отдельный этаж коммерческих помещений, где
+                        разместятся магазины, сервисы и объекты повседневной инфраструктуры.</p>
+                    <p>Жители комплекса смогут пользоваться всеми необходимыми услугами, не покидая территорию.</p>
+                    <div class="ecosystem-tags">
+                        <span class="ecosystem-tag">Магазины</span>
+                        <span class="ecosystem-tag">Сервисы</span>
+                        <span class="ecosystem-tag">Повседневная инфраструктура</span>
+                    </div>
+                </article>
+
+                <article class="ecosystem-card ecosystem-card--visual fade-up" style="transition-delay:0.1s">
+                    <div class="ecosystem-visual">
+                        <img src="./imgs/f (4).jpg" alt="Собственный торговый центр на территории комплекса"
+                            loading="lazy">
+                    </div>
+                    <div class="ecosystem-copy">
+                        <span class="ecosystem-kicker">Ритейл внутри комплекса</span>
+                        <h3>Собственный торговый центр</h3>
+                        <p>В составе жилого комплекса предусмотрен отдельный этаж, отведенный под торговый центр. Здесь
+                            разместятся магазины, кафе и сервисные пространства, создавая полноценную городскую
+                            инфраструктуру внутри комплекса.</p>
+                        <a href="#contact" class="btn-outline-premium">Запросить презентацию</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. PLANS (Curated Selection) -->
+    <section id="plans" class="section plans-section">
+        <div class="container">
+            <div class="section-header text-center fade-up">
+                <span class="accent-label">Выбор</span>
+                <h2 class="title-primary">Планировочные<br>решения</h2>
+                <p class="section-desc">В каталоге показаны реальные планировки проекта в визуальном top-view формате.
+                    Сначала открываются 4 ключевых варианта, остальные можно посмотреть по кнопке ниже или подобрать
+                    вместе с менеджером.</p>
+            </div>
+            <div class="plans-grid" id="plansGrid">
+                <article class="plan-card fade-up">
+                    <div class="plan-type-badge popular">Светлый формат</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/01_03_yellow_96x.png"
+                        aria-label="Открыть рендер планировки 01">
+                        <img src="./planirovki/topview_renders/01_03_yellow_96x.png" alt="Рендер планировки Светлый формат"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Светлый формат</h3>
+                                <div class="plan-kind">Открытая дневная зона и спокойная геометрия пространства</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Подходит для комфортной городской жизни, когда важны воздух, свет и
+                            свободная логика интерьера.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card fade-up" style="transition-delay:0.08s">
+                    <div class="plan-type-badge">SMART формат</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/02_06_yellow_85x.png"
+                        aria-label="Открыть рендер планировки 02">
+                        <img src="./planirovki/topview_renders/02_06_yellow_85x.png" alt="Рендер планировки SMART формат"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>SMART формат</h3>
+                                <div class="plan-kind">Рациональная кухня-гостиная и удобный повседневный сценарий</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Хороший вариант для первого собственного жилья, инвестиции или компактной
+                            квартиры с правильной логикой.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card fade-up" style="transition-delay:0.16s">
+                    <div class="plan-type-badge">Евро-формат</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/03_07_green_69x.png"
+                        aria-label="Открыть рендер планировки 03">
+                        <img src="./planirovki/topview_renders/03_07_green_69x.png" alt="Рендер планировки Евро-формат"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Евро-формат</h3>
+                                <div class="plan-kind">Баланс общей и приватной части для ежедневного комфорта</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Сценарий для тех, кто хочет больше свободы в зонировании и современную
+                            планировочную логику без перегрузки.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card fade-up" style="transition-delay:0.24s">
+                    <div class="plan-type-badge">Компактный формат</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/04_02_green_64x.png"
+                        aria-label="Открыть рендер планировки 04">
+                        <img src="./planirovki/topview_renders/04_02_green_64x.png" alt="Рендер планировки Компактный формат"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Компактный формат</h3>
+                                <div class="plan-kind">Продуманная геометрия для динамичной жизни в городе</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Рациональное решение, если нужен ясный план квартиры, понятная мебельная
+                            логика и комфорт без лишней площади.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card plan-card--extra fade-up" style="transition-delay:0.32s">
+                    <div class="plan-type-badge">Семейный сценарий</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/05_05_green_64x.png"
+                        aria-label="Открыть рендер планировки 05">
+                        <img src="./planirovki/topview_renders/05_05_green_64x.png" alt="Рендер планировки Семейный сценарий"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Семейный сценарий</h3>
+                                <div class="plan-kind">Сбалансированная квартира для спокойного ежедневного ритма</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Подойдёт тем, кто ищет удобное распределение зон, приватность и комфортный
+                            ритм жизни внутри квартиры.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card plan-card--extra fade-up" style="transition-delay:0.4s">
+                    <div class="plan-type-badge">Городской ритм</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/06_07_yellow_43x.png"
+                        aria-label="Открыть рендер планировки 06">
+                        <img src="./planirovki/topview_renders/06_07_yellow_43x.png" alt="Рендер планировки Городской ритм"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Городской ритм</h3>
+                                <div class="plan-kind">Функциональная квартира для активного повседневного сценария</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Практичный вариант для тех, кто хочет жить в центре событий и при этом
+                            сохранить ощущение собранного, удобного пространства.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card plan-card--extra fade-up" style="transition-delay:0.48s">
+                    <div class="plan-type-badge">Функциональная</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/07_09_green_37x.png"
+                        aria-label="Открыть рендер планировки 07">
+                        <img src="./planirovki/topview_renders/07_09_green_37x.png" alt="Рендер планировки Функциональная"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Функциональная</h3>
+                                <div class="plan-kind">Гибкая логика помещений и удобная расстановка мебели</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Подойдёт, если вы выбираете квартиру по удобству ежедневной жизни, свету и
+                            понятному сценарию использования каждого метра.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+
+                <article class="plan-card plan-card--extra fade-up" style="transition-delay:0.56s">
+                    <div class="plan-type-badge">Универсальная</div>
+                    <button class="plan-img-wrap lightbox-trigger" type="button" data-lightbox-group="plans"
+                        data-src="./planirovki/topview_renders/08_10_yellow_36x.png"
+                        aria-label="Открыть рендер планировки 08">
+                        <img src="./planirovki/topview_renders/08_10_yellow_36x.png" alt="Рендер планировки Универсальная"
+                            loading="lazy">
+                        <span class="plan-overlay"><span class="plan-link">Открыть планировку <span>↗</span></span></span>
+                    </button>
+                    <div class="plan-info">
+                        <div class="plan-header">
+                            <div>
+                                <h3>Универсальная</h3>
+                                <div class="plan-kind">Гибкое решение для разных сценариев проживания и покупки</div>
+                            </div>
+                        </div>
+                        <p class="plan-desc">Удобный вариант для сравнения с другими форматами, если вы хотите выбрать
+                            спокойную и универсальную планировочную основу.</p>
+                        <button type="button" class="btn-primary btn-small plan-button" data-manager-open="catalog">Подобрать с менеджером</button>
+                    </div>
+                </article>
+            </div>
+            <div class="plans-actions fade-up">
+                <div class="plans-note">
+                    <span class="plans-note-label">Персональный подбор</span>
+                    <p>Менеджер подберёт актуальные варианты по бюджету, этажу, формату квартиры и сценарию покупки.</p>
+                </div>
+                <div class="plans-buttons">
+                    <button class="btn-outline-premium" id="togglePlansCatalog" type="button"
+                        data-collapsed-label="Показать все планировки"
+                        data-expanded-label="Свернуть каталог">Показать все планировки</button>
+                    <button class="btn-primary" type="button" data-manager-open="catalog">Подобрать планировку с менеджером</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. LOCATION & MAP -->
     <section id="location" class="section location-section">
         <div class="container location-container">
             <div class="location-info">
@@ -451,56 +747,64 @@
         </div>
     </section>
 
-    <!-- 6b. GALLERY -->
+    <!-- 10. GALLERY -->
     <section id="gallery" class="section gallery-section dark-bg">
         <div class="container">
             <div class="section-header text-center fade-up">
                 <span class="accent-label">Визуализация</span>
                 <h2 class="title-primary">Архитектурный ансамбль</h2>
+                <p class="section-desc">В галерее собраны ключевые ракурсы проекта. На первом экране показываются 6
+                    изображений, остальные можно открыть по кнопке и просматривать в lightbox.</p>
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item lightbox-trigger fade-up" data-src="./imgs/f.jpg">
-                    <img src="./imgs/f.jpg" alt="Архитектура 1">
+                <div class="gallery-item lightbox-trigger fade-up" data-lightbox-group="gallery" data-src="./imgs/f.jpg">
+                    <img src="./imgs/f.jpg" alt="Панорама жилого комплекса" loading="lazy">
                     <div class="gallery-hover"><span>Открыть</span></div>
                 </div>
                 <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.1s"
-                    data-src="./imgs/f (1).jpg">
-                    <img src="./imgs/f (1).jpg" alt="Архитектура 2">
+                    data-lightbox-group="gallery" data-src="./imgs/f (1).jpg">
+                    <img src="./imgs/f (1).jpg" alt="Архитектурные фасады комплекса" loading="lazy">
                     <div class="gallery-hover"><span>Открыть</span></div>
                 </div>
                 <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.2s"
-                    data-src="./imgs/f (2).jpg">
-                    <img src="./imgs/f (2).jpg" alt="Интерьер 1">
+                    data-lightbox-group="gallery" data-src="./imgs/f (2).jpg">
+                    <img src="./imgs/f (2).jpg" alt="Ландшафт и дворовое пространство" loading="lazy">
                     <div class="gallery-hover"><span>Открыть</span></div>
                 </div>
-                <div class="gallery-item lightbox-trigger hidden-gallery" data-src="./imgs/f (3).jpg">
-                    <img src="./imgs/f (3).jpg" alt="Интерьер 2">
+                <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.3s"
+                    data-lightbox-group="gallery" data-src="./imgs/f (3).jpg">
+                    <img src="./imgs/f (3).jpg" alt="Визуализация общественных пространств" loading="lazy">
                     <div class="gallery-hover"><span>Открыть</span></div>
                 </div>
-                <div class="gallery-item lightbox-trigger hidden-gallery" data-src="./imgs/f (4).jpg">
-                    <img src="./imgs/f (4).jpg" alt="Территория 1">
+                <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.4s"
+                    data-lightbox-group="gallery" data-src="./imgs/f (4).jpg">
+                    <img src="./imgs/f (4).jpg" alt="Архитектурная перспектива комплекса" loading="lazy">
                     <div class="gallery-hover"><span>Открыть</span></div>
                 </div>
-                <div class="gallery-item lightbox-trigger hidden-gallery" data-src="./imgs/f (5).jpg">
-                    <img src="./imgs/f (5).jpg" alt="Территория 2">
+                <div class="gallery-item lightbox-trigger fade-up" style="transition-delay:0.5s"
+                    data-lightbox-group="gallery" data-src="./imgs/f (5).jpg">
+                    <img src="./imgs/f (5).jpg" alt="Территория и сценарии жизни" loading="lazy">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger hidden-gallery" data-lightbox-group="gallery"
+                    data-src="./imgs/f (1).jpg">
+                    <img src="./imgs/f (1).jpg" alt="Ракурс жилого комплекса со стороны улицы" loading="lazy">
+                    <div class="gallery-hover"><span>Открыть</span></div>
+                </div>
+                <div class="gallery-item lightbox-trigger hidden-gallery" data-lightbox-group="gallery"
+                    data-src="./imgs/f (4).jpg">
+                    <img src="./imgs/f (4).jpg" alt="Коммерческий блок и внутренняя инфраструктура комплекса" loading="lazy">
                     <div class="gallery-hover"><span>Открыть</span></div>
                 </div>
             </div>
-
-            <div class="text-center mt-50 fade-up">
-                <button id="loadMoreGallery" class="btn-outline-premium">
-                    <span>Показать ещё фото</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 3v10M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
-                </button>
+            <div class="gallery-actions text-center mt-40 fade-up">
+                <button class="btn-outline-premium" id="loadMoreGallery">Показать еще</button>
             </div>
         </div>
     </section>
 
-    <!-- INVESTMENT -->
+    <!-- 11. INVESTMENT -->
     <section id="investment" class="section investment-section">
         <div class="container">
             <div class="investment-header text-center fade-up">
@@ -554,7 +858,13 @@
                 <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg>
         </button>
-        <img class="lightbox-content" id="lightbox-img" alt="">
+        <div class="lightbox-stage">
+            <img class="lightbox-content" id="lightbox-img" alt="">
+            <iframe class="lightbox-video" id="lightboxVideo"
+                title="Видео-презентация жилого комплекса Новый Комитас"
+                allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
         <button class="lightbox-prev" id="lightboxPrev" aria-label="Предыдущее">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -678,8 +988,8 @@
                 <div class="quiz-step" id="step-5">
                     <div class="quiz-result-badge">✓ Персональная подборка готова</div>
                     <h3 class="quiz-question">Получите актуальные предложения</h3>
-                    <p class="quiz-subtext">Оставьте контакты — пришлём PDF-презентацию подходящих планировок и
-                        специальные условия бронирования.</p>
+                    <p class="quiz-subtext">Оставьте контакты — пришлём PDF-презентацию подходящих планировок,
+                        презентационный ролик, подборку по наличию и предложим персональный тур по комплексу.</p>
                     <form class="quiz-form" id="quizForm">
                         <div class="quiz-inputs">
                             <input type="text" placeholder="Ваше имя" class="form-input" required>
@@ -748,7 +1058,8 @@
         </div>
         <div class="container cta-inner text-center">
             <span class="accent-label fade-up">Начать сейчас</span>
-            <h2 class="cta-title fade-up">Оставьте заявку и получите<br>актуальные предложения<br><em>по квартирам.</em>
+            <h2 class="cta-title fade-up">Оставьте заявку и получите<br>презентацию, тур по комплексу и<br><em>актуальные
+                    предложения.</em>
             </h2>
             <div class="cta-form-wrap fade-up">
                 <form class="cta-form glass-card" id="ctaForm">
@@ -774,16 +1085,19 @@
         <div class="container footer-inner">
             <div class="footer-brand">
                 <a href="#" class="logo-accent footer-logo">NK</a>
-                <p class="footer-desc">Ереван. Премиальный жилой<br>комплекс нового поколения.</p>
+                <p class="footer-desc">Ереван. Премиальный жилой комплекс нового поколения с коммерческой
+                    инфраструктурой, персональным туром и полной презентацией проекта.</p>
                 <div class="footer-socials">
-                    <a href="#" class="social-link" aria-label="Instagram">
+                    <a href="https://wa.me/79184082834" target="_blank" rel="noreferrer" class="social-link"
+                        aria-label="WhatsApp">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" />
-                            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" />
-                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                            <path
+                                d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.52 0 .18 5.34.18 11.9c0 2.1.55 4.15 1.58 5.97L0 24l6.33-1.66a11.81 11.81 0 0 0 5.73 1.47h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.44-8.43ZM12.07 21.8h-.01a9.9 9.9 0 0 1-5.05-1.39l-.36-.21-3.76.99 1-3.66-.24-.37A9.88 9.88 0 0 1 2.18 11.9c0-5.44 4.43-9.88 9.89-9.88 2.64 0 5.12 1.03 6.98 2.91a9.79 9.79 0 0 1 2.88 6.97c0 5.45-4.43 9.89-9.86 9.9Zm5.42-7.43c-.3-.15-1.79-.88-2.06-.98-.28-.1-.48-.15-.69.15-.2.3-.79.98-.96 1.18-.18.2-.35.23-.65.08-.3-.15-1.28-.47-2.43-1.49-.9-.8-1.51-1.79-1.69-2.09-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.69-1.66-.94-2.27-.25-.6-.5-.52-.69-.53l-.58-.01c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.51 0 1.48 1.08 2.92 1.23 3.12.15.2 2.12 3.23 5.14 4.53.72.31 1.28.5 1.72.65.72.23 1.37.2 1.88.12.58-.09 1.79-.73 2.04-1.44.25-.72.25-1.33.18-1.45-.08-.13-.28-.2-.58-.35Z"
+                                fill="currentColor" />
                         </svg>
                     </a>
-                    <a href="#" class="social-link" aria-label="Telegram">
+                    <a href="https://t.me/+79184082834" target="_blank" rel="noreferrer" class="social-link"
+                        aria-label="Telegram">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                             <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round" />
@@ -796,6 +1110,8 @@
                 <div class="footer-nav-col">
                     <span class="footer-nav-title">Навигация</span>
                     <a href="#lifestyle">Архитектура</a>
+                    <a href="#video">Видео-презентация</a>
+                    <a href="#tour">Тур по комплексу</a>
                     <a href="#advantages">Преимущества</a>
                     <a href="#plans">Планировки</a>
                     <a href="#gallery">Галерея</a>
@@ -814,10 +1130,60 @@
         </div>
     </footer>
 
+    <div class="floating-contacts" aria-label="Быстрая связь">
+        <a href="https://t.me/+79184082834" target="_blank" rel="noreferrer"
+            class="floating-contact floating-contact--telegram" aria-label="Написать в Telegram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.6"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </a>
+        <a href="https://wa.me/79184082834" target="_blank" rel="noreferrer"
+            class="floating-contact floating-contact--whatsapp" aria-label="Написать в WhatsApp">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M20.52 3.48A11.86 11.86 0 0 0 12.07 0C5.52 0 .18 5.34.18 11.9c0 2.1.55 4.15 1.58 5.97L0 24l6.33-1.66a11.81 11.81 0 0 0 5.73 1.47h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.44-8.43ZM12.07 21.8h-.01a9.9 9.9 0 0 1-5.05-1.39l-.36-.21-3.76.99 1-3.66-.24-.37A9.88 9.88 0 0 1 2.18 11.9c0-5.44 4.43-9.88 9.89-9.88 2.64 0 5.12 1.03 6.98 2.91a9.79 9.79 0 0 1 2.88 6.97c0 5.45-4.43 9.89-9.86 9.9Zm5.42-7.43c-.3-.15-1.79-.88-2.06-.98-.28-.1-.48-.15-.69.15-.2.3-.79.98-.96 1.18-.18.2-.35.23-.65.08-.3-.15-1.28-.47-2.43-1.49-.9-.8-1.51-1.79-1.69-2.09-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.69-1.66-.94-2.27-.25-.6-.5-.52-.69-.53l-.58-.01c-.2 0-.53.08-.8.38-.28.3-1.05 1.03-1.05 2.51 0 1.48 1.08 2.92 1.23 3.12.15.2 2.12 3.23 5.14 4.53.72.31 1.28.5 1.72.65.72.23 1.37.2 1.88.12.58-.09 1.79-.73 2.04-1.44.25-.72.25-1.33.18-1.45-.08-.13-.28-.2-.58-.35Z"
+                    fill="currentColor" />
+            </svg>
+        </a>
+    </div>
+
     <!-- SUCCESS TOAST -->
     <div class="toast" id="toast">
         <span class="toast-icon">✓</span>
         <span>Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
+    </div>
+
+    <div class="manager-modal" id="managerModal" aria-hidden="true">
+        <div class="manager-modal__backdrop" data-manager-close></div>
+        <div class="manager-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="managerModalTitle">
+            <button class="manager-modal__close" type="button" aria-label="Закрыть форму" data-manager-close>
+                <span></span>
+                <span></span>
+            </button>
+            <span class="manager-modal__eyebrow">Персональный подбор</span>
+            <h3 class="manager-modal__title" id="managerModalTitle">Подобрать планировку с менеджером</h3>
+            <p class="manager-modal__desc">Оставьте контакты. Менеджер подберёт подходящие варианты по бюджету,
+                сценарию покупки, этажу и формату квартиры, а также предложит удобное время для тура по комплексу.</p>
+            <div class="manager-modal__chips">
+                <span>Подбор по бюджету</span>
+                <span>Актуальное наличие</span>
+                <span>Тур по комплексу</span>
+            </div>
+            <form class="manager-modal__form" id="managerPlanForm">
+                <div class="manager-modal__inputs">
+                    <input type="text" class="form-input" placeholder="Ваше имя" required>
+                    <input type="tel" class="form-input" placeholder="+374 (__) ___-___" required>
+                </div>
+                <button type="submit" class="btn-primary w-100">
+                    <span>Получить подборку планировок</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </form>
+        </div>
     </div>
 
     <script type="module" src="./main.js"></script>
@@ -858,6 +1224,7 @@
             const toast = document.getElementById('toast');
             toast.classList.add('toast--visible');
             setTimeout(() => toast.classList.remove('toast--visible'), 4000);
+            window.closeManagerModal?.();
             e.target.reset();
         }
 
