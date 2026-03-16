@@ -1205,8 +1205,8 @@
 
     <script>
         window.NEW_KOMITAS_LEAD_CONFIG = {
-            endpoint: 'https://script.google.com/macros/s/AKfycbydfJUHvRCh-3Etb0b7OIB8---D4_2_apsBr95inQltJunit-JvmCjeCqSD1_mkAR4c/exec',
-            scriptId: 'AKfycbydfJUHvRCh-3Etb0b7OIB8---D4_2_apsBr95inQltJunit-JvmCjeCqSD1_mkAR4c',
+            endpoint: 'https://script.google.com/macros/s/AKfycbwIM8Mv6hv1ED6bYsgaMQ3hfIt1gy6CByx63C8sG6YIuFn-B6n7sAa3NKvdfHEOfWGZ/exec',
+            scriptId: 'AKfycbwIM8Mv6hv1ED6bYsgaMQ3hfIt1gy6CByx63C8sG6YIuFn-B6n7sAa3NKvdfHEOfWGZ',
             siteId: 'new-komitas',
             chatId: '-5139788206'
         };
@@ -1320,11 +1320,16 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                 },
-                body: params.toString()
+                body: params.toString(),
+                keepalive: true
             };
 
             try {
                 const response = await fetch(config.endpoint, requestOptions);
+                if (response.type === 'opaqueredirect' || (response.status >= 300 && response.status < 400)) {
+                    return { ok: true, reason: `redirect_${response.status || 0}` };
+                }
+
                 const text = await response.text();
                 let result = {};
 
@@ -1347,10 +1352,18 @@
                     throw error;
                 }
 
+                if (navigator.sendBeacon) {
+                    const beaconSent = navigator.sendBeacon(config.endpoint, params);
+                    if (beaconSent) {
+                        return { ok: true, reason: 'send_beacon_fallback' };
+                    }
+                }
+
                 await fetch(config.endpoint, {
                     method: 'POST',
                     mode: 'no-cors',
-                    body: params
+                    body: params,
+                    keepalive: true
                 });
                 return { ok: true, reason: 'no_cors_fallback' };
             }
