@@ -5,64 +5,118 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
-from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont, ImageOps
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 
 ROOT = Path(__file__).resolve().parents[1]
 EXTRACTED_DIR = ROOT / "planirovki" / "extracted"
 OUT_DIR = ROOT / "planirovki" / "topview_renders"
 CANVAS_SIZE = (1600, 1200)
-RENDER_LIMIT = 8
 
 
 PALETTE = {
-    "bg": (0, 0, 0, 0),
-    "wall": (83, 75, 68, 255),
-    "line": (96, 88, 81, 235),
-    "annotation": (119, 129, 148, 170),
-    "champagne": (236, 226, 199, 255),
-    "sage": (206, 219, 207, 255),
-    "mist": (211, 221, 233, 255),
-    "rose": (229, 211, 206, 255),
-    "stone": (224, 214, 195, 255),
+    "bg": (19, 17, 16, 255),
+    "bg_glow": (123, 84, 43),
+    "panel": (248, 244, 238, 255),
+    "panel_border": (255, 251, 245, 255),
+    "wall": (88, 80, 74, 255),
+    "line": (128, 118, 109, 255),
+    "champagne": (241, 231, 207, 255),
+    "sage": (213, 226, 214, 255),
+    "mist": (216, 226, 238, 255),
+    "rose": (236, 218, 215, 255),
 }
 
-
-FONT_SERIF = [
-    Path("C:/Windows/Fonts/georgia.ttf"),
-    Path("C:/Windows/Fonts/times.ttf"),
-]
-FONT_SERIF_BOLD = [
-    Path("C:/Windows/Fonts/georgiab.ttf"),
-    Path("C:/Windows/Fonts/timesbd.ttf"),
-]
 FONT_SANS = [
-    Path("C:/Windows/Fonts/seguiemj.ttf"),  # fallback if standard UI fonts are absent
     Path("C:/Windows/Fonts/segoeui.ttf"),
     Path("C:/Windows/Fonts/arial.ttf"),
 ]
 FONT_SANS_BOLD = [
-    Path("C:/Windows/Fonts/seguisb.ttf"),
     Path("C:/Windows/Fonts/segoeuib.ttf"),
     Path("C:/Windows/Fonts/arialbd.ttf"),
 ]
 
 
-@dataclass
-class Candidate:
+@dataclass(frozen=True)
+class LayoutPreset:
     key: str
-    count: int
-    source: Path
+    slug: str
+    title: str
+    scenario: str
+    source: str
+    crop_box: tuple[int, int, int, int]
 
 
-def load_font(size: int, *, serif: bool = False, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    candidates = FONT_SANS
-    if serif and bold:
-        candidates = FONT_SERIF_BOLD
-    elif serif:
-        candidates = FONT_SERIF
-    elif bold:
-        candidates = FONT_SANS_BOLD
+PRESETS = [
+    LayoutPreset(
+        key="08_pink",
+        slug="01-invest-format",
+        title="Инвест-формат",
+        scenario="Компактный формат для инвестиционной покупки и аренды.",
+        source="planirovki/extracted/1_signed/page_02_unit_08_pink.png",
+        crop_box=(30, 34, 310, 188),
+    ),
+    LayoutPreset(
+        key="07_yellow",
+        slug="02-first-home",
+        title="Первый собственный",
+        scenario="Рациональный вариант для первого жилья в проекте.",
+        source="planirovki/extracted/2_signed/page_02_unit_07_yellow.png",
+        crop_box=(24, 24, 220, 307),
+    ),
+    LayoutPreset(
+        key="01_blue",
+        slug="03-for-couple",
+        title="Для пары",
+        scenario="Больше воздуха и удобная дневная зона для жизни вдвоём.",
+        source="planirovki/extracted/1_signed/page_02_unit_01_blue.png",
+        crop_box=(14, 18, 404, 226),
+    ),
+    LayoutPreset(
+        key="03_yellow",
+        slug="04-balance-format",
+        title="Баланс комфорта",
+        scenario="Спокойная геометрия и универсальный городской сценарий.",
+        source="planirovki/extracted/1_signed/page_02_unit_03_yellow.png",
+        crop_box=(14, 22, 352, 224),
+    ),
+    LayoutPreset(
+        key="05_pink",
+        slug="05-flexible-layout",
+        title="Гибкий формат",
+        scenario="Понятная база для комфортной жизни и свободной меблировки.",
+        source="planirovki/extracted/1_signed/page_02_unit_05_pink.png",
+        crop_box=(24, 22, 220, 228),
+    ),
+    LayoutPreset(
+        key="05_green",
+        slug="06-family-rhythm",
+        title="Семейный ритм",
+        scenario="Больше приватности и удобное разделение жизненных зон.",
+        source="planirovki/extracted/3_signed/page_02_unit_05_green.png",
+        crop_box=(26, 18, 222, 346),
+    ),
+    LayoutPreset(
+        key="07_green",
+        slug="07-spacious-euro",
+        title="Просторный евро",
+        scenario="Формат с запасом пространства для ежедневного комфорта.",
+        source="planirovki/extracted/1_signed/page_02_unit_07_green.png",
+        crop_box=(18, 24, 350, 228),
+    ),
+    LayoutPreset(
+        key="04_green",
+        slug="08-large-family",
+        title="Для большой семьи",
+        scenario="Самая просторная планировка в подборке для семейного сценария.",
+        source="planirovki/extracted/1_signed/page_02_unit_04_green.png",
+        crop_box=(18, 22, 352, 232),
+    ),
+]
+
+
+def load_font(size: int, *, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
+    candidates = FONT_SANS_BOLD if bold else FONT_SANS
     for path in candidates:
         if path.exists():
             return ImageFont.truetype(str(path), size=size)
@@ -77,244 +131,136 @@ def iter_plan_files() -> list[Path]:
     )
 
 
-def pick_top_candidates(limit: int) -> list[Candidate]:
+def count_layouts() -> Counter[str]:
     counts: Counter[str] = Counter()
-    first_seen: dict[str, Path] = {}
     for path in iter_plan_files():
         key = "_".join(path.stem.split("_")[-2:])
         counts[key] += 1
-        first_seen.setdefault(key, path)
-    return [
-        Candidate(key=key, count=count, source=first_seen[key])
-        for key, count in counts.most_common(limit)
-    ]
+    return counts
 
 
-def trim_white_border(image: Image.Image, threshold: int = 248) -> Image.Image:
-    rgb = image.convert("RGB")
-    background = Image.new("RGB", rgb.size, (255, 255, 255))
-    diff = ImageChops.difference(rgb, background).convert("L")
-    bbox = diff.point(lambda value: 255 if value > 255 - threshold else 0).getbbox()
-    if not bbox:
-        return rgb
-    return rgb.crop(bbox)
+def clear_output_dir() -> None:
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    for path in OUT_DIR.iterdir():
+        if path.is_file():
+            path.unlink()
 
 
-def classify_pixel(r: int, g: int, b: int) -> tuple[int, int, int, int]:
-    if r > 247 and g > 247 and b > 247:
-        return PALETTE["bg"]
+def clean_plan_image(source: Image.Image) -> Image.Image:
+    source = source.convert("RGBA")
+    cleaned = Image.new("RGBA", source.size, (0, 0, 0, 0))
+    src = source.load()
+    dst = cleaned.load()
 
-    if r > 225 and b > 225 and g < 175:
-        return PALETTE["wall"]
+    for y in range(source.height):
+        for x in range(source.width):
+            r, g, b, _ = src[x, y]
 
-    if r > 212 and g > 205 and b > 188:
-        return PALETTE["stone"]
+            if r > 246 and g > 246 and b > 246:
+                dst[x, y] = (255, 255, 255, 0)
+                continue
 
-    if r > 206 and g > 206 and b < 190:
-        return PALETTE["champagne"]
+            if r > 205 and b > 155 and g < 175:
+                dst[x, y] = PALETTE["wall"]
+                continue
 
-    if g > 196 and r < 215 and b < 215:
-        return PALETTE["sage"]
+            if b > 170 and g > 120 and r < 165:
+                dst[x, y] = (255, 255, 255, 0)
+                continue
 
-    if b > 210 and g > 210 and r > 180:
-        return PALETTE["mist"]
+            if r > 170 and g < 130 and b < 145:
+                dst[x, y] = (255, 255, 255, 0)
+                continue
 
-    if r > 220 and b > 204 and g > 180:
-        return PALETTE["rose"]
+            if r > 223 and b > 198 and g > 176 and r - g > 10:
+                dst[x, y] = PALETTE["rose"]
+                continue
 
-    if max(r, g, b) < 105:
-        return PALETTE["line"]
+            if b > 205 and g > 192 and r > 174 and b - r > 8:
+                dst[x, y] = PALETTE["mist"]
+                continue
 
-    if b > 190 and g > 165 and r < 190:
-        return PALETTE["annotation"]
+            if g > 188 and r < 220 and b < 220 and g - min(r, b) > 6:
+                dst[x, y] = PALETTE["sage"]
+                continue
 
-    if r > 195 and g < 165 and b < 165:
-        return PALETTE["annotation"]
+            if r > 221 and g > 208 and b < 198 and r - b > 18:
+                dst[x, y] = PALETTE["champagne"]
+                continue
 
-    if max(r, g, b) - min(r, g, b) < 28:
-        alpha = 225 if max(r, g, b) < 180 else 205
-        return (115, 106, 98, alpha)
+            if max(r, g, b) < 112:
+                dst[x, y] = PALETTE["wall"]
+                continue
 
-    return (198, 188, 176, 225)
+            if max(r, g, b) - min(r, g, b) < 22:
+                tone = max(132, min(214, int((r + g + b) / 3) + 24))
+                dst[x, y] = (tone, tone, tone, 255)
+                continue
 
+            dst[x, y] = (244, 240, 234, 255)
 
-def stylize_plan(source: Image.Image) -> tuple[Image.Image, Image.Image]:
-    image = trim_white_border(source)
-    rgba = Image.new("RGBA", image.size, PALETTE["bg"])
-    pixels_in = image.load()
-    pixels_out = rgba.load()
-    for y in range(image.height):
-        for x in range(image.width):
-            pixels_out[x, y] = classify_pixel(*pixels_in[x, y])
-
-    alpha = rgba.getchannel("A")
-    mask = alpha.point(lambda value: 255 if value > 10 else 0)
-
-    light = Image.new("RGBA", image.size, (255, 246, 231, 0))
-    light.putalpha(ImageChops.offset(mask, -4, -6).filter(ImageFilter.GaussianBlur(12)).point(lambda v: min(v, 60)))
-    dark = Image.new("RGBA", image.size, (46, 37, 31, 0))
-    dark.putalpha(ImageChops.offset(mask, 8, 10).filter(ImageFilter.GaussianBlur(18)).point(lambda v: min(v, 86)))
-    rgba = Image.alpha_composite(rgba, dark)
-    rgba = Image.alpha_composite(rgba, light)
-
-    contour = ImageChops.subtract(mask.filter(ImageFilter.MaxFilter(5)), mask.filter(ImageFilter.MinFilter(5)))
-    outline = Image.new("RGBA", image.size, (63, 56, 51, 0))
-    outline.putalpha(contour.point(lambda v: min(v, 92)))
-    rgba = Image.alpha_composite(rgba, outline)
-
-    return rgba, mask
+    return cleaned.filter(ImageFilter.UnsharpMask(radius=1.4, percent=170, threshold=3))
 
 
-def fit_into_canvas(image: Image.Image, box: tuple[int, int]) -> Image.Image:
-    scale = min(box[0] / image.width, box[1] / image.height)
-    new_size = (
-        max(1, int(round(image.width * scale))),
-        max(1, int(round(image.height * scale))),
-    )
-    return image.resize(new_size, Image.Resampling.LANCZOS)
+def compose_board(plan: Image.Image) -> Image.Image:
+    canvas = Image.new("RGBA", CANVAS_SIZE, PALETTE["bg"])
 
+    glow_mask = Image.new("L", CANVAS_SIZE, 0)
+    ImageDraw.Draw(glow_mask).ellipse((220, 130, 1430, 1080), fill=110)
+    glow_mask = glow_mask.filter(ImageFilter.GaussianBlur(170))
+    glow_layer = Image.new("RGBA", CANVAS_SIZE, PALETTE["bg_glow"] + (0,))
+    glow_layer.putalpha(glow_mask)
+    canvas = Image.alpha_composite(canvas, glow_layer)
 
-def add_blurred_glow(canvas: Image.Image, bbox: tuple[int, int, int, int], color: tuple[int, int, int], opacity: int, blur: int) -> Image.Image:
-    mask = Image.new("L", canvas.size, 0)
-    ImageDraw.Draw(mask).ellipse(bbox, fill=opacity)
-    mask = mask.filter(ImageFilter.GaussianBlur(blur))
-    layer = Image.new("RGBA", canvas.size, color + (0,))
-    layer.putalpha(mask)
-    return Image.alpha_composite(canvas, layer)
+    panel_box = (128, 122, 1472, 1078)
+    shadow_mask = Image.new("L", CANVAS_SIZE, 0)
+    ImageDraw.Draw(shadow_mask).rounded_rectangle(panel_box, radius=48, fill=185)
+    shadow_mask = shadow_mask.filter(ImageFilter.GaussianBlur(38))
+    shadow_layer = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
+    shadow_layer.putalpha(shadow_mask)
+    canvas = Image.alpha_composite(canvas, shadow_layer)
 
+    panel = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
+    panel_mask = Image.new("L", CANVAS_SIZE, 0)
+    ImageDraw.Draw(panel_mask).rounded_rectangle(panel_box, radius=42, fill=255)
+    panel.putalpha(panel_mask)
+    panel = Image.alpha_composite(panel, Image.new("RGBA", CANVAS_SIZE, PALETTE["panel"]))
+    canvas = Image.alpha_composite(canvas, panel)
 
-def compose_scene(plan: Image.Image, mask: Image.Image, candidate: Candidate, rank: int) -> Image.Image:
-    scene = Image.new("RGBA", CANVAS_SIZE, (16, 14, 15, 255))
+    border = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
+    border_draw = ImageDraw.Draw(border)
+    border_draw.rounded_rectangle(panel_box, radius=42, outline=PALETTE["panel_border"], width=3)
+    canvas = Image.alpha_composite(canvas, border)
 
-    vertical = ImageOps.colorize(
-        Image.linear_gradient("L").resize(CANVAS_SIZE),
-        black="#141212",
-        white="#2b221d",
-    ).convert("RGBA")
-    scene = Image.alpha_composite(scene, vertical)
-    scene = add_blurred_glow(scene, (180, 70, 1480, 950), (120, 83, 42), 90, 130)
-    scene = add_blurred_glow(scene, (-220, -40, 820, 760), (82, 79, 92), 55, 130)
-    scene = add_blurred_glow(scene, (480, 620, 1320, 1320), (170, 103, 42), 75, 170)
+    fit = ImageOps.contain(plan, (1120, 780), Image.Resampling.LANCZOS)
+    fit = fit.filter(ImageFilter.UnsharpMask(radius=1.2, percent=130, threshold=2))
+    pos = ((CANVAS_SIZE[0] - fit.width) // 2, (CANVAS_SIZE[1] - fit.height) // 2)
+    canvas.alpha_composite(fit, pos)
 
-    content = fit_into_canvas(plan, (1280, 860))
-    alpha = fit_into_canvas(mask.convert("L"), (1280, 860))
-    x = (CANVAS_SIZE[0] - content.width) // 2 + 70
-    y = (CANVAS_SIZE[1] - content.height) // 2 + 55
-
-    depth_mask = Image.new("L", CANVAS_SIZE, 0)
-    for offset in range(10, 27):
-        depth_mask.paste(40 + (offset - 10) * 2, (x + offset, y + offset), alpha)
-    depth_mask = depth_mask.filter(ImageFilter.GaussianBlur(16))
-    depth = Image.new("RGBA", CANVAS_SIZE, (58, 40, 27, 0))
-    depth.putalpha(depth_mask)
-    scene = Image.alpha_composite(scene, depth)
-
-    floor_shadow = Image.new("L", CANVAS_SIZE, 0)
-    shadow_box = (x - 90, y + content.height - 40, x + content.width + 110, y + content.height + 120)
-    ImageDraw.Draw(floor_shadow).ellipse(shadow_box, fill=160)
-    floor_shadow = floor_shadow.filter(ImageFilter.GaussianBlur(55))
-    floor_layer = Image.new("RGBA", CANVAS_SIZE, (21, 15, 13, 0))
-    floor_layer.putalpha(floor_shadow)
-    scene = Image.alpha_composite(scene, floor_layer)
-
-    glass_plate = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
-    plate_mask = Image.new("L", CANVAS_SIZE, 0)
-    ImageDraw.Draw(plate_mask).rounded_rectangle(
-        (x - 26, y - 26, x + content.width + 26, y + content.height + 26),
-        radius=30,
-        fill=72,
-    )
-    plate_mask = plate_mask.filter(ImageFilter.GaussianBlur(8))
-    glass_plate.putalpha(plate_mask)
-    glass_plate = Image.alpha_composite(
-        glass_plate,
-        Image.new("RGBA", CANVAS_SIZE, (255, 255, 255, 18)),
-    )
-    scene = Image.alpha_composite(scene, glass_plate)
-
-    top_highlight_mask = Image.new("L", CANVAS_SIZE, 0)
-    ImageDraw.Draw(top_highlight_mask).rounded_rectangle(
-        (x - 26, y - 26, x + content.width + 26, y + 56),
-        radius=30,
-        fill=80,
-    )
-    top_highlight_mask = top_highlight_mask.filter(ImageFilter.GaussianBlur(18))
-    top_highlight = Image.new("RGBA", CANVAS_SIZE, (255, 244, 230, 0))
-    top_highlight.putalpha(top_highlight_mask)
-    scene = Image.alpha_composite(scene, top_highlight)
-
-    plan_layer = Image.new("RGBA", CANVAS_SIZE, (0, 0, 0, 0))
-    plan_layer.paste(content, (x, y), content)
-    scene = Image.alpha_composite(scene, plan_layer)
-
-    edge_mask = Image.new("L", CANVAS_SIZE, 0)
-    edge_mask.paste(alpha.filter(ImageFilter.MaxFilter(7)), (x - 1, y - 1))
-    edge_mask = edge_mask.filter(ImageFilter.GaussianBlur(4))
-    edge = Image.new("RGBA", CANVAS_SIZE, (255, 242, 225, 0))
-    edge.putalpha(edge_mask.point(lambda value: min(value, 56)))
-    scene = Image.alpha_composite(scene, edge)
-
-    draw = ImageDraw.Draw(scene)
-    title_font = load_font(34, serif=True, bold=True)
-    key_font = load_font(23, bold=True)
-    meta_font = load_font(22)
-    small_font = load_font(18)
-
-    card_x = 76
-    card_y = 72
-    card_w = 468
-    card_h = 96
-    draw.rounded_rectangle(
-        (card_x, card_y, card_x + card_w, card_y + card_h),
-        radius=26,
-        fill=(8, 8, 9, 150),
-        outline=(72, 57, 45, 110),
-        width=2,
-    )
-    draw.text((card_x + 26, card_y + 16), "NEW KOMITAS", font=small_font, fill=(198, 188, 173, 180))
-    draw.text((card_x + 26, card_y + 36), "Top-View Render", font=title_font, fill=(246, 239, 230, 235))
-    badge = f"No. {rank:02d}"
-    badge_width = draw.textbbox((0, 0), badge, font=key_font)[2]
-    draw.text((card_x + card_w - 26 - badge_width, card_y + 42), badge, font=key_font, fill=(214, 178, 126, 220))
-    draw.text((card_x + 26, card_y + 70), candidate.key.replace("_", " / "), font=key_font, fill=(214, 178, 126, 205))
-
-    footer_x = 76
-    footer_y = CANVAS_SIZE[1] - 126
-    footer_w = 454
-    footer_h = 62
-    draw.rounded_rectangle(
-        (footer_x, footer_y, footer_x + footer_w, footer_y + footer_h),
-        radius=22,
-        fill=(10, 10, 11, 148),
-        outline=(66, 52, 40, 90),
-        width=2,
-    )
-    draw.text((footer_x + 24, footer_y + 18), f"Repeated layout in source set: {candidate.count} times", font=meta_font, fill=(224, 214, 194, 215))
-
-    return scene.convert("RGB")
+    return canvas.convert("RGB")
 
 
 def build_contact_sheet(items: list[dict[str, str]]) -> Path:
     cols = 2
     thumb_w = 720
     thumb_h = 540
-    label_h = 84
-    pad = 36
+    label_h = 104
+    pad = 34
     rows = (len(items) + cols - 1) // cols
     canvas = Image.new("RGB", (pad + cols * (thumb_w + pad), pad + rows * (thumb_h + label_h + pad)), (12, 12, 13))
     draw = ImageDraw.Draw(canvas)
-    name_font = load_font(30, serif=True)
-    meta_font = load_font(22)
+    title_font = load_font(30, bold=True)
+    meta_font = load_font(20)
 
     for index, item in enumerate(items):
-        image = Image.open(item["output"]).convert("RGB")
+        image = Image.open(ROOT / item["output"]).convert("RGB")
         image = ImageOps.fit(image, (thumb_w, thumb_h), Image.Resampling.LANCZOS)
         x = pad + (index % cols) * (thumb_w + pad)
         y = pad + (index // cols) * (thumb_h + label_h + pad)
         canvas.paste(image, (x, y))
         draw.rounded_rectangle((x, y + thumb_h + 12, x + thumb_w, y + thumb_h + label_h), radius=18, fill=(20, 20, 22))
-        draw.text((x + 18, y + thumb_h + 22), item["key"].replace("_", " / "), font=name_font, fill=(236, 228, 217))
-        draw.text((x + 18, y + thumb_h + 52), f"{item['count']} repetitions", font=meta_font, fill=(184, 171, 155))
+        draw.text((x + 20, y + thumb_h + 22), item["title"], font=title_font, fill=(236, 228, 217))
+        draw.text((x + 20, y + thumb_h + 60), item["scenario"], font=meta_font, fill=(190, 180, 166))
 
     output = OUT_DIR / "contact_sheet.png"
     canvas.save(output, quality=96)
@@ -322,37 +268,40 @@ def build_contact_sheet(items: list[dict[str, str]]) -> Path:
 
 
 def main() -> None:
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
-    selected = pick_top_candidates(RENDER_LIMIT)
+    clear_output_dir()
+    counts = count_layouts()
     manifest: list[dict[str, str | int]] = []
 
-    for index, candidate in enumerate(selected, start=1):
-        source = Image.open(candidate.source).convert("RGB")
-        plan, mask = stylize_plan(source)
-        render = compose_scene(plan, mask, candidate, index)
-        output = OUT_DIR / f"{index:02d}_{candidate.key}_{candidate.count}x.png"
-        render.save(output, quality=96)
+    for preset in PRESETS:
+        source_path = ROOT / preset.source
+        image = Image.open(source_path).convert("RGBA").crop(preset.crop_box)
+        plan = clean_plan_image(image)
+        board = compose_board(plan)
+        output = OUT_DIR / f"{preset.slug}.png"
+        board.save(output, quality=96)
+
         manifest.append(
             {
-                "rank": index,
-                "key": candidate.key,
-                "count": candidate.count,
-                "source": str(candidate.source.relative_to(ROOT)).replace("\\", "/"),
+                "key": preset.key,
+                "title": preset.title,
+                "scenario": preset.scenario,
+                "count": counts[preset.key],
+                "source": preset.source,
                 "output": str(output.relative_to(ROOT)).replace("\\", "/"),
             }
         )
 
     contact_sheet = build_contact_sheet(manifest)
     metadata = {
-        "note": "Stylized top-view render concepts generated from the most repeated extracted apartment layouts.",
+        "note": "Readable presentation boards generated from manually curated apartment plan crops.",
         "items": manifest,
         "contact_sheet": str(contact_sheet.relative_to(ROOT)).replace("\\", "/"),
     }
-    (OUT_DIR / "metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    (OUT_DIR / "metadata.json").write_text(json.dumps(metadata, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    print(f"Generated {len(manifest)} renders")
+    print(f"Generated {len(manifest)} presentation boards")
     for item in manifest:
-        print(f"{item['rank']:02d}. {item['key']} -> {item['output']}")
+        print(f"{item['title']} -> {item['output']}")
     print(f"Contact sheet: {metadata['contact_sheet']}")
 
 

@@ -1,61 +1,69 @@
 {
-  "note": "Stylized top-view render concepts generated from the most repeated extracted apartment layouts.",
+  "note": "Readable presentation boards generated from manually curated apartment plan crops.",
   "items": [
     {
-      "rank": 1,
-      "key": "03_yellow",
-      "count": 96,
-      "source": "planirovki/extracted/1_signed/page_02_unit_03_yellow.png",
-      "output": "planirovki/topview_renders/01_03_yellow_96x.png"
+      "key": "08_pink",
+      "title": "Инвест-формат",
+      "scenario": "Компактный формат для инвестиционной покупки и аренды.",
+      "count": 32,
+      "source": "planirovki/extracted/1_signed/page_02_unit_08_pink.png",
+      "output": "planirovki/topview_renders/01-invest-format.png"
     },
     {
-      "rank": 2,
-      "key": "06_yellow",
-      "count": 85,
-      "source": "planirovki/extracted/1_signed/page_02_unit_06_yellow.png",
-      "output": "planirovki/topview_renders/02_06_yellow_85x.png"
-    },
-    {
-      "rank": 3,
-      "key": "07_green",
-      "count": 69,
-      "source": "planirovki/extracted/1_signed/page_02_unit_07_green.png",
-      "output": "planirovki/topview_renders/03_07_green_69x.png"
-    },
-    {
-      "rank": 4,
-      "key": "02_green",
-      "count": 64,
-      "source": "planirovki/extracted/1_signed/page_02_unit_02_green.png",
-      "output": "planirovki/topview_renders/04_02_green_64x.png"
-    },
-    {
-      "rank": 5,
-      "key": "05_green",
-      "count": 64,
-      "source": "planirovki/extracted/3_signed/page_02_unit_05_green.png",
-      "output": "planirovki/topview_renders/05_05_green_64x.png"
-    },
-    {
-      "rank": 6,
       "key": "07_yellow",
+      "title": "Первый собственный",
+      "scenario": "Рациональный вариант для первого жилья в проекте.",
       "count": 43,
       "source": "planirovki/extracted/2_signed/page_02_unit_07_yellow.png",
-      "output": "planirovki/topview_renders/06_07_yellow_43x.png"
+      "output": "planirovki/topview_renders/02-first-home.png"
     },
     {
-      "rank": 7,
-      "key": "09_green",
-      "count": 37,
-      "source": "planirovki/extracted/2_signed/page_02_unit_09_green.png",
-      "output": "planirovki/topview_renders/07_09_green_37x.png"
+      "key": "01_blue",
+      "title": "Для пары",
+      "scenario": "Больше воздуха и удобная дневная зона для жизни вдвоём.",
+      "count": 32,
+      "source": "planirovki/extracted/1_signed/page_02_unit_01_blue.png",
+      "output": "planirovki/topview_renders/03-for-couple.png"
     },
     {
-      "rank": 8,
-      "key": "10_yellow",
-      "count": 36,
-      "source": "planirovki/extracted/3_signed/page_02_unit_10_yellow.png",
-      "output": "planirovki/topview_renders/08_10_yellow_36x.png"
+      "key": "03_yellow",
+      "title": "Баланс комфорта",
+      "scenario": "Спокойная геометрия и универсальный городской сценарий.",
+      "count": 96,
+      "source": "planirovki/extracted/1_signed/page_02_unit_03_yellow.png",
+      "output": "planirovki/topview_renders/04-balance-format.png"
+    },
+    {
+      "key": "05_pink",
+      "title": "Гибкий формат",
+      "scenario": "Понятная база для комфортной жизни и свободной меблировки.",
+      "count": 32,
+      "source": "planirovki/extracted/1_signed/page_02_unit_05_pink.png",
+      "output": "planirovki/topview_renders/05-flexible-layout.png"
+    },
+    {
+      "key": "05_green",
+      "title": "Семейный ритм",
+      "scenario": "Больше приватности и удобное разделение жизненных зон.",
+      "count": 64,
+      "source": "planirovki/extracted/3_signed/page_02_unit_05_green.png",
+      "output": "planirovki/topview_renders/06-family-rhythm.png"
+    },
+    {
+      "key": "07_green",
+      "title": "Просторный евро",
+      "scenario": "Формат с запасом пространства для ежедневного комфорта.",
+      "count": 69,
+      "source": "planirovki/extracted/1_signed/page_02_unit_07_green.png",
+      "output": "planirovki/topview_renders/07-spacious-euro.png"
+    },
+    {
+      "key": "04_green",
+      "title": "Для большой семьи",
+      "scenario": "Самая просторная планировка в подборке для семейного сценария.",
+      "count": 33,
+      "source": "planirovki/extracted/1_signed/page_02_unit_04_green.png",
+      "output": "planirovki/topview_renders/08-large-family.png"
     }
   ],
   "contact_sheet": "planirovki/topview_renders/contact_sheet.png"

@@ -329,11 +329,26 @@ let lightboxImages = []
 let currentLightboxIndex = 0
 let currentLightboxGroup = ''
 
+function resolveLightboxSource(item) {
+    const image = item.querySelector('img')
+    if (image?.currentSrc) return image.currentSrc
+    if (image?.src) return image.src
+
+    const rawSrc = item.getAttribute('data-src')
+    if (!rawSrc) return ''
+
+    try {
+        return new URL(rawSrc, window.location.href).href
+    } catch (error) {
+        return rawSrc
+    }
+}
+
 function buildLightboxImages(groupName) {
     currentLightboxGroup = groupName
     lightboxImages = []
     document.querySelectorAll(`.lightbox-trigger[data-lightbox-group="${groupName}"]`).forEach((item) => {
-        const src = item.getAttribute('data-src') || item.querySelector('img')?.src
+        const src = resolveLightboxSource(item)
         const alt = item.querySelector('img')?.alt || ''
         if (src) lightboxImages.push({ src, alt })
     })
@@ -342,6 +357,7 @@ function buildLightboxImages(groupName) {
 function openLightboxImage(groupName, index) {
     if (!lightbox || !lightboxImg) return
     buildLightboxImages(groupName)
+    if (!lightboxImages.length || !lightboxImages[index]) return
     currentLightboxIndex = index
     lightbox.classList.remove('is-video')
     lightboxImg.src = lightboxImages[index].src
