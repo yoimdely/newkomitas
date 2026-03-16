@@ -133,14 +133,18 @@
                     <h3 class="form-title">Получить&nbsp;презентацию</h3>
                     <p class="form-desc">Оставьте контакты — пришлём презентацию проекта, каталог
                         планировок, актуальные цены и предложим удобное время для тура по комплексу.</p>
-                    <form class="lead-form" id="heroLeadForm">
+                    <form class="lead-form" id="heroLeadForm" data-lead-source="hero_presentation"
+                        data-lead-message="Запрос презентации проекта, каталога планировок, актуальных цен и тура по комплексу.">
                         <div class="input-group">
                             <label>Ваше имя</label>
-                            <input type="text" placeholder="Александр" required>
+                            <input type="text" name="name" placeholder="Александр" required>
                         </div>
                         <div class="input-group">
                             <label>Телефон</label>
-                            <input type="tel" placeholder="+374 (__) ___-___" required>
+                            <input type="tel" name="phone" placeholder="+374 (__) ___-___" required>
+                        </div>
+                        <div class="form-hp" aria-hidden="true">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
                         </div>
                         <button type="submit" class="btn-primary w-100">
                             <span>Скачать PDF — 24 MB</span>
@@ -990,10 +994,14 @@
                     <h3 class="quiz-question">Получите актуальные предложения</h3>
                     <p class="quiz-subtext">Оставьте контакты — пришлём PDF-презентацию подходящих планировок,
                         презентационный ролик, подборку по наличию и предложим персональный тур по комплексу.</p>
-                    <form class="quiz-form" id="quizForm">
+                    <form class="quiz-form" id="quizForm" data-lead-source="quiz_selection"
+                        data-lead-message="Запрос персональной подборки планировок по результатам квиза.">
                         <div class="quiz-inputs">
-                            <input type="text" placeholder="Ваше имя" class="form-input" required>
-                            <input type="tel" placeholder="+374 (__) ___-___" class="form-input" required>
+                            <input type="text" name="name" placeholder="Ваше имя" class="form-input" required>
+                            <input type="tel" name="phone" placeholder="+374 (__) ___-___" class="form-input" required>
+                        </div>
+                        <div class="form-hp" aria-hidden="true">
+                            <input type="text" name="website" tabindex="-1" autocomplete="off">
                         </div>
                         <button type="submit" class="btn-primary w-100">
                             <span>Получить презентацию</span>
@@ -1062,10 +1070,14 @@
                     предложения.</em>
             </h2>
             <div class="cta-form-wrap fade-up">
-                <form class="cta-form glass-card" id="ctaForm">
+                <form class="cta-form glass-card" id="ctaForm" data-lead-source="cta_offer"
+                    data-lead-message="Запрос общей презентации проекта, тура по комплексу и актуальных предложений.">
                     <div class="cta-inputs">
-                        <input type="text" class="form-input" placeholder="Имя" required>
-                        <input type="tel" class="form-input" placeholder="+374 (__) ___-___" required>
+                        <input type="text" name="name" class="form-input" placeholder="Имя" required>
+                        <input type="tel" name="phone" class="form-input" placeholder="+374 (__) ___-___" required>
+                    </div>
+                    <div class="form-hp" aria-hidden="true">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
                     </div>
                     <button type="submit" class="btn-primary cta-btn">
                         <span>Получить предложение</span>
@@ -1149,9 +1161,9 @@
     </div>
 
     <!-- SUCCESS TOAST -->
-    <div class="toast" id="toast">
-        <span class="toast-icon">✓</span>
-        <span>Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="toast-icon" id="toastIcon">✓</span>
+        <span id="toastMessage">Заявка отправлена! Мы свяжемся с вами в ближайшее время.</span>
     </div>
 
     <div class="manager-modal" id="managerModal" aria-hidden="true">
@@ -1170,10 +1182,15 @@
                 <span>Актуальное наличие</span>
                 <span>Тур по комплексу</span>
             </div>
-            <form class="manager-modal__form" id="managerPlanForm">
+            <form class="manager-modal__form" id="managerPlanForm" data-lead-source="manager_catalog"
+                data-lead-message="Запрос на подбор планировок с менеджером и запись на тур по комплексу.">
                 <div class="manager-modal__inputs">
-                    <input type="text" class="form-input" placeholder="Ваше имя" required>
-                    <input type="tel" class="form-input" placeholder="+374 (__) ___-___" required>
+                    <input type="text" name="name" class="form-input" placeholder="Ваше имя" required>
+                    <input type="tel" name="phone" class="form-input" placeholder="+374 (__) ___-___" required>
+                </div>
+                <input type="hidden" name="manager_context" id="managerLeadContext" value="catalog">
+                <div class="form-hp" aria-hidden="true">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off">
                 </div>
                 <button type="submit" class="btn-primary w-100">
                     <span>Получить подборку планировок</span>
@@ -1186,15 +1203,168 @@
         </div>
     </div>
 
+    <script>
+        window.NEW_KOMITAS_LEAD_CONFIG = {
+            endpoint: 'https://script.google.com/macros/s/AKfycbydfJUHvRCh-3Etb0b7OIB8---D4_2_apsBr95inQltJunit-JvmCjeCqSD1_mkAR4c/exec',
+            scriptId: 'AKfycbydfJUHvRCh-3Etb0b7OIB8---D4_2_apsBr95inQltJunit-JvmCjeCqSD1_mkAR4c',
+            siteId: 'new-komitas',
+            chatId: '-5139788206'
+        };
+    </script>
+
     <script type="module" src="./main.js"></script>
     <script>
         // QUIZ LOGIC
         let currentStep = 1;
         const totalSteps = 4;
         const stepLabels = ['Шаг 1 из 4', 'Шаг 2 из 4', 'Шаг 3 из 4', 'Шаг 4 из 4', 'Завершение'];
+        const quizAnswers = {};
+        let toastTimer = null;
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastMessage = document.getElementById('toastMessage');
+            if (!toast || !toastIcon || !toastMessage) return;
+
+            toast.classList.remove('toast--error');
+            if (type === 'error') {
+                toast.classList.add('toast--error');
+            }
+
+            toastIcon.textContent = type === 'error' ? '!' : '✓';
+            toastMessage.textContent = message;
+            toast.classList.add('toast--visible');
+
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove('toast--visible'), 4500);
+        }
+
+        function setSubmitState(form, isLoading) {
+            const submitButton = form?.querySelector('button[type="submit"]');
+            if (!submitButton) return;
+
+            if (!submitButton.dataset.defaultLabel) {
+                submitButton.dataset.defaultLabel = submitButton.querySelector('span')?.textContent?.trim() || submitButton.textContent.trim();
+            }
+
+            submitButton.disabled = isLoading;
+            submitButton.classList.toggle('is-loading', isLoading);
+
+            const label = submitButton.querySelector('span');
+            if (label) {
+                label.textContent = isLoading ? 'Отправляем заявку...' : submitButton.dataset.defaultLabel;
+            }
+        }
+
+        function collectUtmFromLocation() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                utm_source: params.get('utm_source') || '',
+                utm_medium: params.get('utm_medium') || '',
+                utm_campaign: params.get('utm_campaign') || '',
+                utm_content: params.get('utm_content') || '',
+                utm_term: params.get('utm_term') || ''
+            };
+        }
+
+        function getLeadPayload(form) {
+            const config = window.NEW_KOMITAS_LEAD_CONFIG || {};
+            const formData = new FormData(form);
+            const payload = {
+                siteId: config.siteId || 'new-komitas',
+                siteUrl: window.location.origin,
+                chatId: config.chatId || '',
+                source: form.dataset.leadSource || form.id || 'lead',
+                name: String(formData.get('name') || '').trim(),
+                phone: String(formData.get('phone') || '').trim(),
+                email: String(formData.get('email') || '').trim(),
+                message: String(form.dataset.leadMessage || '').trim(),
+                pageUrl: window.location.href,
+                siteHost: window.location.host,
+                hp: String(formData.get('website') || '').trim(),
+                ...collectUtmFromLocation()
+            };
+
+            if (form.id === 'quizForm' && Object.keys(quizAnswers).length) {
+                payload.quiz = quizAnswers;
+            }
+
+            if (form.id === 'managerPlanForm') {
+                const managerContext = String(formData.get('manager_context') || 'catalog').trim();
+                payload.source = managerContext ? `manager_${managerContext}` : payload.source;
+                payload.message = `Запрос на подбор планировок с менеджером. Контекст: ${managerContext || 'catalog'}.`;
+            }
+
+            return payload;
+        }
+
+        function payloadToParams(payload) {
+            const params = new URLSearchParams();
+            Object.entries(payload).forEach(([key, value]) => {
+                if (value === undefined || value === null || value === '') return;
+                params.append(key, typeof value === 'object' ? JSON.stringify(value) : String(value));
+            });
+            return params;
+        }
+
+        async function postLead(payload) {
+            const config = window.NEW_KOMITAS_LEAD_CONFIG || {};
+            if (!config.endpoint) {
+                throw new Error('missing_endpoint');
+            }
+
+            const params = payloadToParams(payload);
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: params.toString()
+            };
+
+            try {
+                const response = await fetch(config.endpoint, requestOptions);
+                const text = await response.text();
+                let result = {};
+
+                try {
+                    result = text ? JSON.parse(text) : {};
+                } catch (_error) {
+                    result = { ok: response.ok, raw: text };
+                }
+
+                if (!response.ok || result.ok === false) {
+                    throw new Error(result.reason || `http_${response.status}`);
+                }
+
+                return result;
+            } catch (error) {
+                const reason = String(error && error.message ? error.message : '');
+                const isNetworkError = error instanceof TypeError || reason === 'Failed to fetch' || reason === 'Load failed';
+
+                if (!isNetworkError) {
+                    throw error;
+                }
+
+                await fetch(config.endpoint, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: params
+                });
+                return { ok: true, reason: 'no_cors_fallback' };
+            }
+        }
 
         function nextQuizStep(step, btn) {
-            if (btn) btn.classList.add('quiz-btn--selected');
+            if (btn) {
+                btn.classList.add('quiz-btn--selected');
+                const currentQuestion = document.querySelector(`#step-${currentStep} .quiz-question`);
+                const answer = btn.querySelector('.qbtn-text')?.textContent?.trim() || btn.textContent.trim();
+                if (currentQuestion && answer) {
+                    quizAnswers[currentQuestion.textContent.trim()] = answer;
+                }
+            }
 
             const steps = document.querySelectorAll('.quiz-step');
             const current = document.getElementById('step-' + currentStep);
@@ -1219,17 +1389,31 @@
         }
 
         // FORMS
-        function handleFormSubmit(e) {
+        async function handleFormSubmit(e) {
             e.preventDefault();
-            const toast = document.getElementById('toast');
-            toast.classList.add('toast--visible');
-            setTimeout(() => toast.classList.remove('toast--visible'), 4000);
-            window.closeManagerModal?.();
-            e.target.reset();
+            const form = e.target;
+
+            if (!(form instanceof HTMLFormElement)) return;
+
+            try {
+                setSubmitState(form, true);
+                await postLead(getLeadPayload(form));
+                showToast('Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+                window.closeManagerModal?.();
+                form.reset();
+
+                if (form.id === 'quizForm') {
+                    Object.keys(quizAnswers).forEach((key) => delete quizAnswers[key]);
+                }
+            } catch (_error) {
+                showToast('Не удалось отправить заявку. Попробуйте ещё раз или напишите нам в Telegram.', 'error');
+            } finally {
+                setSubmitState(form, false);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('form').forEach(f => f.addEventListener('submit', handleFormSubmit));
+            document.querySelectorAll('form[data-lead-source]').forEach(f => f.addEventListener('submit', handleFormSubmit));
 
             // Mobile menu
             const burger = document.getElementById('navBurger');

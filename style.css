@@ -2006,6 +2006,16 @@ p {
     -webkit-backdrop-filter: var(--glass-blur);
 }
 
+.form-hp {
+    position: absolute;
+    left: -5000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
 /* ---- TOAST ---- */
 .toast {
     position: fixed;
@@ -2034,10 +2044,27 @@ p {
     pointer-events: auto;
 }
 
+.toast--error {
+    border-color: rgba(255, 116, 116, 0.9);
+}
+
 .toast-icon {
     color: var(--accent-orange);
     font-size: 1.1rem;
     flex-shrink: 0;
+}
+
+.toast--error .toast-icon {
+    color: #ff7474;
+}
+
+button.is-loading {
+    opacity: 0.8;
+    cursor: wait;
+}
+
+button:disabled {
+    cursor: not-allowed;
 }
 
 /* ---- SCROLL ANIMATIONS ---- */

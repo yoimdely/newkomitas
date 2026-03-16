@@ -244,8 +244,11 @@ const plansGrid = document.getElementById('plansGrid')
 const togglePlansCatalog = document.getElementById('togglePlansCatalog')
 const extraPlanCards = plansGrid ? plansGrid.querySelectorAll('.plan-card--extra') : []
 const managerModal = document.getElementById('managerModal')
+const managerPlanForm = document.getElementById('managerPlanForm')
+const managerLeadContext = document.getElementById('managerLeadContext')
 const managerModalClosers = managerModal?.querySelectorAll('[data-manager-close]') || []
 const managerModalOpeners = document.querySelectorAll('[data-manager-open]')
+let activeManagerSource = 'catalog'
 
 if (loadMoreBtn && hiddenItems.length > 0) {
     loadMoreBtn.addEventListener('click', () => {
@@ -282,8 +285,15 @@ if (togglePlansCatalog && plansGrid && extraPlanCards.length > 0) {
     })
 }
 
-function openManagerModal() {
+function openManagerModal(source = 'catalog') {
     if (!managerModal) return
+    activeManagerSource = source || 'catalog'
+    if (managerPlanForm) {
+        managerPlanForm.dataset.leadSource = `manager_${activeManagerSource}`
+    }
+    if (managerLeadContext) {
+        managerLeadContext.value = activeManagerSource
+    }
     managerModal.classList.add('active')
     managerModal.setAttribute('aria-hidden', 'false')
     document.body.classList.add('modal-open')
@@ -303,7 +313,7 @@ window.closeManagerModal = closeManagerModal
 managerModalOpeners.forEach((button) => {
     button.addEventListener('click', (event) => {
         event.preventDefault()
-        openManagerModal()
+        openManagerModal(button.dataset.managerOpen)
     })
 })
 
